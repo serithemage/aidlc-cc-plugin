@@ -20,47 +20,19 @@ AI-DLC는 프로젝트의 요구사항에 적응하는 구조화되면서도 유
 
 ## 3단계 생명 주기
 
-```
-                         사용자 요청
-                              |
-                              v
-        ╔═══════════════════════════════════════╗
-        ║     INCEPTION PHASE                   ║
-        ║     계획 & Application 설계           ║
-        ╠═══════════════════════════════════════╣
-        ║ • Workspace Detection (항상)         ║
-        ║ • Reverse Engineering (조건부)       ║
-        ║ • Requirements Analysis (항상)       ║
-        ║ • User Stories (조건부)              ║
-        ║ • Workflow Planning (항상)           ║
-        ║ • Application Design (조건부)        ║
-        ║ • Units Generation (조건부)          ║
-        ╚═══════════════════════════════════════╝
-                              |
-                              v
-        ╔═══════════════════════════════════════╗
-        ║     CONSTRUCTION PHASE                ║
-        ║     설계, 구현 & 테스트               ║
-        ╠═══════════════════════════════════════╣
-        ║ • 단위별 루프 (각 단위에 대해):      ║
-        ║   - Functional Design (조건부)       ║
-        ║   - NFR Requirements Assess (조건부) ║
-        ║   - NFR Design (조건부)              ║
-        ║   - Infrastructure Design (조건부)   ║
-        ║   - Code Generation (항상)           ║
-        ║ • Build and Test (항상)              ║
-        ╚═══════════════════════════════════════╝
-                              |
-                              v
-        ╔═══════════════════════════════════════╗
-        ║     OPERATIONS PHASE                  ║
-        ║     향후를 위한 자리 표시자           ║
-        ╠═══════════════════════════════════════╣
-        ║ • Operations (자리 표시자)           ║
-        ╚═══════════════════════════════════════╝
-                              |
-                              v
-                          완료
+```mermaid
+flowchart TD
+    Start(["사용자 요청"])
+
+    INCEPTION["INCEPTION PHASE\n계획 & Application 설계\n\n• Workspace Detection (항상)\n• Reverse Engineering (조건부)\n• Requirements Analysis (항상)\n• User Stories (조건부)\n• Workflow Planning (항상)\n• Application Design (조건부)\n• Units Generation (조건부)"]
+
+    CONSTRUCTION["CONSTRUCTION PHASE\n설계, 구현 & 테스트\n\n단위별 루프 (각 단위에 대해):\n• Functional Design (조건부)\n• NFR Requirements Assess (조건부)\n• NFR Design (조건부)\n• Infrastructure Design (조건부)\n• Code Generation (항상)\n\n• Build and Test (항상)"]
+
+    OPERATIONS["OPERATIONS PHASE\n향후를 위한 자리 표시자\n\n• Operations (자리 표시자)"]
+
+    End(["완료"])
+
+    Start --> INCEPTION --> CONSTRUCTION --> OPERATIONS --> End
 ```
 
 ### 단계 분해:
