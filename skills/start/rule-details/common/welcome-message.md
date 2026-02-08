@@ -20,39 +20,47 @@ AI-DLC는 프로젝트의 요구사항에 적응하는 구조화되면서도 유
 
 ## 3단계 생명 주기
 
-```mermaid
-flowchart TD
-    Start(["사용자 요청"])
-
-    subgraph INCEPTION["INCEPTION PHASE — 계획 & Application 설계"]
-        direction TB
-        I1["Workspace Detection (항상)"] --> I2["Reverse Engineering (조건부)"]
-        I2 --> I3["Requirements Analysis (항상)"]
-        I3 --> I4["User Stories (조건부)"]
-        I4 --> I5["Workflow Planning (항상)"]
-        I5 --> I6["Application Design (조건부)"]
-        I6 --> I7["Units Generation (조건부)"]
-    end
-
-    subgraph CONSTRUCTION["CONSTRUCTION PHASE — 설계, 구현 & 테스트"]
-        direction TB
-        C1["Functional Design (조건부)"] --> C2["NFR Requirements Assess (조건부)"]
-        C2 --> C3["NFR Design (조건부)"]
-        C3 --> C4["Infrastructure Design (조건부)"]
-        C4 --> C5["Code Generation (항상)"]
-        C5 --> C6["Build and Test (항상)"]
-    end
-
-    subgraph OPERATIONS["OPERATIONS PHASE — 자리 표시자"]
-        O1["Operations (자리 표시자)"]
-    end
-
-    End(["완료"])
-
-    Start --> I1
-    I7 --> C1
-    C6 --> O1
-    O1 --> End
+```
+                         User Request
+                              |
+                              v
+        ╔═══════════════════════════════════════╗
+        ║     INCEPTION PHASE                   ║
+        ║     Planning & Application Design     ║
+        ╠═══════════════════════════════════════╣
+        ║ • Workspace Detection (ALWAYS)        ║
+        ║ • Reverse Engineering (COND)          ║
+        ║ • Requirements Analysis (ALWAYS)      ║
+        ║ • User Stories (CONDITIONAL)          ║
+        ║ • Workflow Planning (ALWAYS)          ║
+        ║ • Application Design (CONDITIONAL)    ║
+        ║ • Units Generation (CONDITIONAL)      ║
+        ╚═══════════════════════════════════════╝
+                              |
+                              v
+        ╔═══════════════════════════════════════╗
+        ║     CONSTRUCTION PHASE                ║
+        ║     Design, Implementation & Test     ║
+        ╠═══════════════════════════════════════╣
+        ║ • Per-Unit Loop (for each unit):      ║
+        ║   - Functional Design (COND)          ║
+        ║   - NFR Requirements Assess (COND)    ║
+        ║   - NFR Design (COND)                 ║
+        ║   - Infrastructure Design (COND)      ║
+        ║   - Code Generation (ALWAYS)          ║
+        ║ • Build and Test (ALWAYS)             ║
+        ╚═══════════════════════════════════════╝
+                              |
+                              v
+        ╔═══════════════════════════════════════╗
+        ║     OPERATIONS PHASE                  ║
+        ║     Placeholder for Future            ║
+        ╠═══════════════════════════════════════╣
+        ║ • Operations (PLACEHOLDER)            ║
+        ╚═══════════════════════════════════════╝
+                              |
+                              v
+                          Complete
 ```
 
 ### 단계 분해:

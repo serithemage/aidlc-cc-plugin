@@ -226,38 +226,30 @@
 
 ## 변경 요청 의사 결정 트리
 
-```mermaid
-flowchart TD
-    Start["사용자가 변경 요청"]
-
-    Q1{"현재 단계인가?"}
-    Q2{"완료된 단계인가?"}
-    Q3{"건너뛴 단계를<br/>추가하는 것인가?"}
-    Q4{"계획된 단계를<br/>건너뛰는 것인가?"}
-    Q5{"깊이 수준을<br/>변경하는 것인가?"}
-
-    A1["현재 단계 수정 또는 재시작 가능"]
-    A2["의존 단계에 대한 영향 평가"]
-    A2_low["낮은 영향: 수정 후 의존 항목 업데이트"]
-    A2_high["높은 영향: 해당 단계부터 재시작 권장"]
-    A3["전제조건 확인, 계획에 추가, 실행"]
-    A4["영향에 대해 경고, 확인 받기, 건너뛰기"]
-    A5["계획 업데이트, 접근 방식 조정"]
-    A6["사용자와 요청 명확화"]
-
-    Start --> Q1
-    Q1 -->|예| A1
-    Q1 -->|아니오| Q2
-    Q2 -->|예| A2
-    A2 -->|낮은 영향| A2_low
-    A2 -->|높은 영향| A2_high
-    Q2 -->|아니오| Q3
-    Q3 -->|예| A3
-    Q3 -->|아니오| Q4
-    Q4 -->|예| A4
-    Q4 -->|아니오| Q5
-    Q5 -->|예| A5
-    Q5 -->|아니오| A6
+```
+User requests change
+    |
+    ├─ Is it current phase?
+    |   ├─ Yes: Can modify or restart current phase
+    |   └─ No: Go to next question
+    |
+    ├─ Is it a completed phase?
+    |   ├─ Yes: Assess impact on dependent phases
+    |   |   ├─ Low impact: Modify and update dependents
+    |   |   └─ High impact: Recommend restart from that phase
+    |   └─ No: Go to next question
+    |
+    ├─ Is it adding a skipped phase?
+    |   ├─ Yes: Check prerequisites, add to plan, execute
+    |   └─ No: Go to next question
+    |
+    ├─ Is it skipping a planned phase?
+    |   ├─ Yes: Warn about impact, get confirmation, skip
+    |   └─ No: Go to next question
+    |
+    └─ Is it changing depth level?
+        ├─ Yes: Update plan, adjust approach
+        └─ No: Clarify request with user
 ```
 
 ---

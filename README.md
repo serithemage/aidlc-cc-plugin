@@ -43,36 +43,47 @@ Claude는 이전 세션을 자동으로 감지하고 (`aidlc-docs/aidlc-state.md
 
 AI-DLC는 세 단계의 적응형 워크플로우를 통해 안내합니다:
 
-```mermaid
-flowchart TD
-    Start(["사용자 요청"])
-
-    subgraph INCEPTION["INCEPTION 단계 — 계획 및 아키텍처"]
-        direction TB
-        I1["워크스페이스 감지"] --> I2["역공학 (조건부)"]
-        I2 --> I3["요구사항 분석"]
-        I3 --> I4["User Stories (조건부)"]
-        I4 --> I5["워크플로우 계획"]
-        I5 --> I6["애플리케이션 설계 (조건부)"]
-        I6 --> I7["단위 생성 (조건부)"]
-    end
-
-    subgraph CONSTRUCTION["CONSTRUCTION 단계 — 설계 및 구현"]
-        direction TB
-        C1["기능 설계 (조건부)"] --> C2["NFR 요구사항 (조건부)"]
-        C2 --> C3["NFR 설계 (조건부)"]
-        C3 --> C4["인프라 설계 (조건부)"]
-        C4 --> C5["코드 생성"]
-        C5 --> C6["빌드 및 테스트"]
-    end
-
-    subgraph OPERATIONS["OPERATIONS 단계"]
-        O1["향후 배포 및 모니터링"]
-    end
-
-    Start --> I1
-    I7 --> C1
-    C6 --> O1
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      USER REQUEST                           │
+│         "Develop a recommendation engine..."                │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  INCEPTION PHASE                            │
+│           Planning & Architecture                           │
+├─────────────────────────────────────────────────────────────┤
+│  • Workspace Detection (greenfield/brownfield)              │
+│  • Reverse Engineering (brownfield only)                    │
+│  • Requirements Analysis (adaptive depth)                   │
+│  • User Stories (conditional)                               │
+│  • Workflow Planning (adaptive - user approval)             │
+│  • Application Design (conditional)                         │
+│  • Units Generation (conditional)                           │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 CONSTRUCTION PHASE                          │
+│            Design & Implementation                          │
+├─────────────────────────────────────────────────────────────┤
+│  Per-Unit Loop:                                             │
+│    • Functional Design (conditional)                        │
+│    • NFR Requirements (conditional)                         │
+│    • NFR Design (conditional)                               │
+│    • Infrastructure Design (conditional)                    │
+│    • Code Generation (always - with plan approval)          │
+│                                                             │
+│  After All Units:                                           │
+│    • Build and Test (always)                                │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  OPERATIONS PHASE                           │
+│               (Placeholder for Future)                      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### 주요 원칙
