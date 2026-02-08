@@ -24,15 +24,35 @@ AI-DLC는 프로젝트의 요구사항에 적응하는 구조화되면서도 유
 flowchart TD
     Start(["사용자 요청"])
 
-    INCEPTION["<b>INCEPTION PHASE</b><br/>계획 & Application 설계<br/><br/>• Workspace Detection (항상)<br/>• Reverse Engineering (조건부)<br/>• Requirements Analysis (항상)<br/>• User Stories (조건부)<br/>• Workflow Planning (항상)<br/>• Application Design (조건부)<br/>• Units Generation (조건부)"]
+    subgraph INCEPTION["INCEPTION PHASE — 계획 & Application 설계"]
+        direction TB
+        I1["Workspace Detection (항상)"] --> I2["Reverse Engineering (조건부)"]
+        I2 --> I3["Requirements Analysis (항상)"]
+        I3 --> I4["User Stories (조건부)"]
+        I4 --> I5["Workflow Planning (항상)"]
+        I5 --> I6["Application Design (조건부)"]
+        I6 --> I7["Units Generation (조건부)"]
+    end
 
-    CONSTRUCTION["<b>CONSTRUCTION PHASE</b><br/>설계, 구현 & 테스트<br/><br/>단위별 루프 (각 단위에 대해):<br/>• Functional Design (조건부)<br/>• NFR Requirements Assess (조건부)<br/>• NFR Design (조건부)<br/>• Infrastructure Design (조건부)<br/>• Code Generation (항상)<br/><br/>• Build and Test (항상)"]
+    subgraph CONSTRUCTION["CONSTRUCTION PHASE — 설계, 구현 & 테스트"]
+        direction TB
+        C1["Functional Design (조건부)"] --> C2["NFR Requirements Assess (조건부)"]
+        C2 --> C3["NFR Design (조건부)"]
+        C3 --> C4["Infrastructure Design (조건부)"]
+        C4 --> C5["Code Generation (항상)"]
+        C5 --> C6["Build and Test (항상)"]
+    end
 
-    OPERATIONS["<b>OPERATIONS PHASE</b><br/>향후를 위한 자리 표시자<br/><br/>• Operations (자리 표시자)"]
+    subgraph OPERATIONS["OPERATIONS PHASE — 자리 표시자"]
+        O1["Operations (자리 표시자)"]
+    end
 
     End(["완료"])
 
-    Start --> INCEPTION --> CONSTRUCTION --> OPERATIONS --> End
+    Start --> I1
+    I7 --> C1
+    C6 --> O1
+    O1 --> End
 ```
 
 ### 단계 분해:
