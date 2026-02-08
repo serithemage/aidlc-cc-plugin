@@ -24,11 +24,11 @@ AI-DLC는 프로젝트의 요구사항에 적응하는 구조화되면서도 유
 flowchart TD
     Start(["사용자 요청"])
 
-    INCEPTION["INCEPTION PHASE\n계획 & Application 설계\n\n• Workspace Detection (항상)\n• Reverse Engineering (조건부)\n• Requirements Analysis (항상)\n• User Stories (조건부)\n• Workflow Planning (항상)\n• Application Design (조건부)\n• Units Generation (조건부)"]
+    INCEPTION["<b>INCEPTION PHASE</b><br/>계획 & Application 설계<br/><br/>• Workspace Detection (항상)<br/>• Reverse Engineering (조건부)<br/>• Requirements Analysis (항상)<br/>• User Stories (조건부)<br/>• Workflow Planning (항상)<br/>• Application Design (조건부)<br/>• Units Generation (조건부)"]
 
-    CONSTRUCTION["CONSTRUCTION PHASE\n설계, 구현 & 테스트\n\n단위별 루프 (각 단위에 대해):\n• Functional Design (조건부)\n• NFR Requirements Assess (조건부)\n• NFR Design (조건부)\n• Infrastructure Design (조건부)\n• Code Generation (항상)\n\n• Build and Test (항상)"]
+    CONSTRUCTION["<b>CONSTRUCTION PHASE</b><br/>설계, 구현 & 테스트<br/><br/>단위별 루프 (각 단위에 대해):<br/>• Functional Design (조건부)<br/>• NFR Requirements Assess (조건부)<br/>• NFR Design (조건부)<br/>• Infrastructure Design (조건부)<br/>• Code Generation (항상)<br/><br/>• Build and Test (항상)"]
 
-    OPERATIONS["OPERATIONS PHASE\n향후를 위한 자리 표시자\n\n• Operations (자리 표시자)"]
+    OPERATIONS["<b>OPERATIONS PHASE</b><br/>향후를 위한 자리 표시자<br/><br/>• Operations (자리 표시자)"]
 
     End(["완료"])
 

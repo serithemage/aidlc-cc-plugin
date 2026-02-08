@@ -47,11 +47,11 @@ AI-DLC는 세 단계의 적응형 워크플로우를 통해 안내합니다:
 flowchart TD
     Start(["사용자 요청"])
 
-    INCEPTION["INCEPTION 단계\n계획 및 아키텍처\n\n• 워크스페이스 감지 (Greenfield/Brownfield)\n• 역공학 (Brownfield만 해당)\n• 요구사항 분석 (적응형 깊이)\n• User Stories (조건부)\n• 워크플로우 계획 (적응형 - 사용자 승인)\n• 애플리케이션 설계 (조건부)\n• 단위 생성 (조건부)"]
+    INCEPTION["<b>INCEPTION 단계</b><br/>계획 및 아키텍처<br/><br/>• 워크스페이스 감지 (Greenfield/Brownfield)<br/>• 역공학 (Brownfield만 해당)<br/>• 요구사항 분석 (적응형 깊이)<br/>• User Stories (조건부)<br/>• 워크플로우 계획 (적응형 - 사용자 승인)<br/>• 애플리케이션 설계 (조건부)<br/>• 단위 생성 (조건부)"]
 
-    CONSTRUCTION["CONSTRUCTION 단계\n설계 및 구현\n\n단위별 반복:\n• 기능 설계 (조건부)\n• NFR 요구사항 (조건부)\n• NFR 설계 (조건부)\n• 인프라 설계 (조건부)\n• 코드 생성 (항상 - 계획 승인 포함)\n\n모든 단위 완료 후:\n• 빌드 및 테스트 (항상)"]
+    CONSTRUCTION["<b>CONSTRUCTION 단계</b><br/>설계 및 구현<br/><br/>단위별 반복:<br/>• 기능 설계 (조건부)<br/>• NFR 요구사항 (조건부)<br/>• NFR 설계 (조건부)<br/>• 인프라 설계 (조건부)<br/>• 코드 생성 (항상 - 계획 승인 포함)<br/><br/>모든 단위 완료 후:<br/>• 빌드 및 테스트 (항상)"]
 
-    OPERATIONS["OPERATIONS 단계\n(향후를 위한 플레이스홀더)"]
+    OPERATIONS["<b>OPERATIONS 단계</b><br/>(향후를 위한 플레이스홀더)"]
 
     Start --> INCEPTION --> CONSTRUCTION --> OPERATIONS
 ```
