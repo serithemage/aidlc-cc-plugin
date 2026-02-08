@@ -150,7 +150,7 @@ AI-DLC는 불필요한 단계를 건너뛰고 특정 문제에 집중합니다.
 
 ## 감사의 말
 
-이 플러그인은 Amazon Q Developer / Kiro CLI를 위해 원래 설계된 [AWS AI-DLC Workflows](https://github.com/aws-samples/aidlc-workflows) 참조 구현을 기반으로 합니다. Claude Code의 플러그인 시스템에 맞게 채팅 기반 상호작용 패턴으로 조정되었습니다.
+이 플러그인은 Amazon Q Developer / Kiro CLI를 위해 원래 설계된 [AWS AI-DLC Workflows](https://github.com/awslabs/aidlc-workflows) 참조 구현을 기반으로 합니다. Claude Code의 플러그인 시스템에 맞게 채팅 기반 상호작용 패턴으로 조정되었습니다.
 
 원래 방법론은 AWS Samples 팀이 개발했습니다.
 
