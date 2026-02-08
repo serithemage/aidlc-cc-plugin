@@ -5,7 +5,9 @@
 
 # Claude Code를 위한 AI-DLC 플러그인 (한국어 해설)
 
-AI가 안내하는 구조화되고 적응형인 소프트웨어 개발 방법론입니다.
+AI-DLC(AI-Driven Development Life Cycle)는 AI가 소프트웨어 개발의 전체 생명주기를 체계적으로 안내하는 적응형 개발 방법론입니다. Inception(계획/설계), Construction(구현/테스트), Operations(운영)의 3단계로 구성되며, 프로젝트의 복잡도에 따라 필요한 단계만 자동으로 선택하여 실행합니다.
+
+AI-DLC에 대한 자세한 내용은 [AI-DLC 소개 페이지](https://serithemage.github.io/AI-DLC/)를 참고하세요.
 
 ## 설치
 
