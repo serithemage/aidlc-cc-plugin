@@ -1,29 +1,29 @@
 # Question Format Guide
 
-## MANDATORY: Check User's Question Preference First
+## 필수: 먼저 사용자의 질문 선호도 확인
 
-**CRITICAL**: Before asking any questions, check the user's preferred question style from `aidlc-docs/aidlc-preferences.md`:
-- **If preference is "Interactive UI"**: Use the `AskUserQuestion` tool (Section A below)
-- **If preference is "Text responses"**: Use text-based questions (Section B below)
+**중요**: 질문하기 전에 `aidlc-docs/aidlc-preferences.md`에서 사용자가 선호하는 질문 스타일을 확인하세요.
+- **선호도가 "Interactive UI"인 경우**: `AskUserQuestion` tool 사용 (아래 섹션 A)
+- **선호도가 "Text responses"인 경우**: 텍스트 기반 질문 사용 (아래 섹션 B)
 
 ---
 
-# SECTION A: Interactive UI Format (AskUserQuestion Tool)
+# 섹션 A: Interactive UI 형식 (AskUserQuestion Tool)
 
-## When User Prefers Interactive UI
+## 사용자가 Interactive UI를 선호하는 경우
 
-### Rule: Use Claude Code's Native Question Tool
-**CRITICAL**: You must use the `AskUserQuestion` tool to ask questions. This provides clickable options for easy selection. DO NOT create question files for users to fill out.
+### 규칙: Claude Code의 네이티브 질문 도구 사용
+**중요**: 질문을 하려면 반드시 `AskUserQuestion` tool을 사용해야 합니다. 이 도구는 쉽게 선택할 수 있는 클릭 가능한 옵션을 제공합니다. 사용자가 채워야 하는 질문 파일을 생성하지 마세요.
 
-### Using AskUserQuestion Tool
+### AskUserQuestion Tool 사용하기
 
-#### When to Use
-- **Requirements gathering**: Any time you need to clarify user requirements
-- **Design decisions**: When multiple valid approaches exist
-- **Ambiguity resolution**: When user responses need clarification
-- **Planning questions**: During inception or construction planning phases
+#### 사용 시기
+- **요구사항 수집**: 사용자 요구사항을 명확히 해야 할 때
+- **설계 결정**: 여러 유효한 접근 방식이 존재할 때
+- **모호성 해결**: 사용자 응답에 대한 명확화가 필요할 때
+- **계획 질문**: inception 또는 construction 계획 단계 중
 
-#### Tool Parameters
+#### Tool 매개변수
 
 ```json
 {
@@ -55,38 +55,38 @@
 }
 ```
 
-**CRITICAL Guidelines**:
-- Ask 1-4 questions per `AskUserQuestion` call (tool limit)
-- Each question gets a short `header` (max 12 chars) displayed as a chip
-- Each question must have 2-4 `options` (tool enforces this)
-- Each option needs a `label` (1-5 words) and `description` (explains the choice)
-- Set `multiSelect: false` for single-choice questions (default)
-- Set `multiSelect: true` when multiple options can be selected
-- The tool automatically provides an "Other" option for custom responses
+**중요 가이드라인**:
+- `AskUserQuestion` 호출당 1-4개의 질문 요청 (tool 제한)
+- 각 질문은 칩으로 표시되는 짧은 `header` (최대 12자) 필요
+- 각 질문은 2-4개의 `options` 필요 (tool에서 강제)
+- 각 옵션은 `label` (1-5단어)과 `description` (선택 설명) 필요
+- 단일 선택 질문은 `multiSelect: false` 설정 (기본값)
+- 여러 옵션 선택 가능할 때는 `multiSelect: true` 설정
+- tool은 자동으로 사용자 정의 응답을 위한 "Other" 옵션 제공
 
-#### Question Grouping Strategy
+#### 질문 그룹화 전략
 
-**Simple Sets (1-4 questions)**: Use single `AskUserQuestion` call
+**간단한 세트 (1-4개 질문)**: 단일 `AskUserQuestion` 호출 사용
 ```
-Use AskUserQuestion tool with all questions in one call
-```
-
-**Medium Sets (5-8 questions)**: Break into 2 groups by topic
-```
-First, use AskUserQuestion for core questions (1-4)
-Then, use AskUserQuestion for follow-up questions (1-4)
+모든 질문을 한 번의 호출로 AskUserQuestion tool 사용
 ```
 
-**Large Sets (9+ questions)**: Break into 3+ logical phases
+**중간 세트 (5-8개 질문)**: 주제별로 2개 그룹으로 분할
 ```
-Phase 1: Use AskUserQuestion for first topic (1-4 questions)
-Phase 2: Use AskUserQuestion for second topic (1-4 questions)
-Phase 3: Use AskUserQuestion for third topic (1-4 questions)
+먼저, 핵심 질문(1-4개)에 대해 AskUserQuestion 사용
+그다음, 후속 질문(1-4개)에 대해 AskUserQuestion 사용
 ```
 
-### Complete Example
+**대규모 세트 (9개 이상 질문)**: 3개 이상의 논리적 단계로 분할
+```
+Phase 1: 첫 번째 주제(1-4개 질문)에 대해 AskUserQuestion 사용
+Phase 2: 두 번째 주제(1-4개 질문)에 대해 AskUserQuestion 사용
+Phase 3: 세 번째 주제(1-4개 질문)에 대해 AskUserQuestion 사용
+```
 
-#### Example 1: Requirements Clarification (3 questions)
+### 완전한 예제
+
+#### 예제 1: 요구사항 명확화 (3개 질문)
 
 ```json
 {
@@ -152,7 +152,7 @@ Phase 3: Use AskUserQuestion for third topic (1-4 questions)
 }
 ```
 
-#### Example 2: Multi-Select Question
+#### 예제 2: 다중 선택 질문
 
 ```json
 {
@@ -184,23 +184,23 @@ Phase 3: Use AskUserQuestion for third topic (1-4 questions)
 }
 ```
 
-### Processing User Responses
+### 사용자 응답 처리
 
-After calling `AskUserQuestion`, the tool returns user answers. Process them as follows:
+`AskUserQuestion` 호출 후, tool은 사용자 답변을 반환합니다. 다음과 같이 처리하세요.
 
-1. **Parse responses**: Extract user selections from the `answers` object
-2. **Validate completeness**: Ensure all questions were answered
-3. **Check for "Other"**: If user selected "Other", they provided custom text
-4. **Analyze for contradictions**: Check for logically inconsistent answers
-5. **Ask follow-ups if needed**: Use another `AskUserQuestion` call for clarifications
+1. **응답 파싱**: `answers` 객체에서 사용자 선택 추출
+2. **완성도 검증**: 모든 질문이 답변되었는지 확인
+3. **"Other" 확인**: 사용자가 "Other"를 선택한 경우, 사용자 정의 텍스트 제공
+4. **모순 분석**: 논리적으로 일관성 없는 답변 확인
+5. **필요시 후속 질문**: 명확화를 위해 다른 `AskUserQuestion` 호출 사용
 
-### Recording Q&A for Audit Trail
+### 감사 추적을 위한 Q&A 기록
 
-After collecting all answers, create a summary file:
+모든 답변을 수집한 후, 요약 파일 생성:
 
-**File**: `aidlc-docs/{phase-name}/questions-summary.md`
+**파일**: `aidlc-docs/{phase-name}/questions-summary.md`
 
-**Format**:
+**형식**:
 ```markdown
 # [Phase Name] Questions and Answers
 
@@ -225,44 +225,44 @@ After collecting all answers, create a summary file:
 **Summary**: User confirmed SSO authentication for a web-based brownfield project.
 ```
 
-### Error Handling
+### 오류 처리
 
-#### Missing Answers
-If any question is not answered (shouldn't happen with the tool, but check):
+#### 답변 누락
+질문에 답변이 없는 경우 (tool에서는 발생하지 않아야 하지만 확인):
 ```
 I noticed Question [X] wasn't answered. Let me ask that again.
-[Use AskUserQuestion with just that question]
+[해당 질문만으로 AskUserQuestion 사용]
 ```
 
-#### Ambiguous Custom Responses
-If user provided "Other" text that's unclear:
+#### 모호한 사용자 정의 응답
+사용자가 불명확한 "Other" 텍스트를 제공한 경우:
 ```
 Thank you for that context. Let me clarify with a follow-up question.
-[Use AskUserQuestion with clarification question]
+[명확화 질문으로 AskUserQuestion 사용]
 ```
 
-### Contradiction and Ambiguity Detection
+### 모순 및 모호성 감지
 
-**MANDATORY**: After receiving user responses, you MUST check for contradictions and ambiguities.
+**필수**: 사용자 응답을 받은 후, 모순과 모호성을 반드시 확인해야 합니다.
 
-#### Detecting Contradictions
-Look for logically inconsistent answers:
-- Scope mismatch: "Bug fix" but "Entire codebase affected"
-- Risk mismatch: "Low risk" but "Breaking changes"
-- Timeline mismatch: "Quick fix" but "Multiple subsystems"
-- Impact mismatch: "Single component" but "Significant architecture changes"
+#### 모순 감지
+논리적으로 일관성 없는 답변 찾기:
+- 범위 불일치: "Bug fix"이지만 "Entire codebase affected"
+- 위험 불일치: "Low risk"이지만 "Breaking changes"
+- 일정 불일치: "Quick fix"이지만 "Multiple subsystems"
+- 영향 불일치: "Single component"이지만 "Significant architecture changes"
 
-#### Detecting Ambiguities
-Look for unclear or borderline responses:
-- Answers that could fit multiple classifications
-- Responses that lack specificity
-- Conflicting indicators across multiple questions
+#### 모호성 감지
+불명확하거나 경계선 응답 찾기:
+- 여러 분류에 적합할 수 있는 답변
+- 구체성이 부족한 응답
+- 여러 질문에 걸쳐 상충되는 지표
 
-#### Handling Contradictions and Ambiguities
+#### 모순 및 모호성 처리
 
-If contradictions or ambiguities detected, ask clarifying questions immediately using `AskUserQuestion`:
+모순이나 모호성이 감지되면, `AskUserQuestion`을 사용하여 즉시 명확화 질문:
 
-**Example**:
+**예제**:
 ```json
 {
   "questions": [
@@ -289,28 +289,28 @@ If contradictions or ambiguities detected, ask clarifying questions immediately 
 }
 ```
 
-#### Workflow for Clarifications
+#### 명확화 워크플로우
 
-1. **Detect**: Analyze all responses for contradictions/ambiguities immediately
-2. **Ask**: Use `AskUserQuestion` to present clarifying questions right away
-3. **Wait**: Tool handles waiting for user response automatically
-4. **Re-validate**: After clarifications, check again for consistency
-5. **Record**: Include clarifications in the questions-summary.md file
-6. **Proceed**: Only move forward when all contradictions are resolved
+1. **감지**: 모든 응답을 즉시 분석하여 모순/모호성 확인
+2. **질문**: 명확화 질문을 바로 제시하기 위해 `AskUserQuestion` 사용
+3. **대기**: Tool이 사용자 응답을 자동으로 대기 처리
+4. **재검증**: 명확화 후, 일관성 재확인
+5. **기록**: questions-summary.md 파일에 명확화 내용 포함
+6. **진행**: 모든 모순이 해결된 후에만 진행
 
-### Best Practices
+### 모범 사례
 
-1. **Be Specific**: Questions should be clear and unambiguous
-2. **Be Comprehensive**: Cover all necessary information, but respect the 1-4 question limit per call
-3. **Be Concise**: Use short headers (max 12 chars) and clear labels (1-5 words)
-4. **Be Practical**: Options should be realistic and actionable
-5. **Be Descriptive**: Provide helpful descriptions for each option
-6. **Be Flexible**: The tool provides "Other" option automatically
-7. **Be Thorough**: Always check for contradictions before proceeding
+1. **구체적으로**: 질문은 명확하고 모호하지 않아야 함
+2. **포괄적으로**: 모든 필요한 정보를 다루되, 호출당 1-4개 질문 제한 존중
+3. **간결하게**: 짧은 header (최대 12자)와 명확한 label (1-5단어) 사용
+4. **실용적으로**: 옵션은 현실적이고 실행 가능해야 함
+5. **설명적으로**: 각 옵션에 대해 유용한 설명 제공
+6. **유연하게**: Tool이 자동으로 "Other" 옵션 제공
+7. **철저하게**: 진행하기 전에 항상 모순 확인
 
-### Phase-Specific Examples
+### 단계별 예제
 
-#### Example: Requirements with 2 options
+#### 예제: 2개 옵션이 있는 요구사항
 
 ```json
 {
@@ -334,7 +334,7 @@ If contradictions or ambiguities detected, ask clarifying questions immediately 
 }
 ```
 
-#### Example: Architecture with 3 options
+#### 예제: 3개 옵션이 있는 아키텍처
 
 ```json
 {
@@ -362,7 +362,7 @@ If contradictions or ambiguities detected, ask clarifying questions immediately 
 }
 ```
 
-#### Example: Pattern with 4 options
+#### 예제: 4개 옵션이 있는 패턴
 
 ```json
 {
@@ -396,86 +396,86 @@ If contradictions or ambiguities detected, ask clarifying questions immediately 
 
 ---
 
-# SECTION B: Text-Based Format
+# 섹션 B: 텍스트 기반 형식
 
-## When User Prefers Text Responses
+## 사용자가 텍스트 응답을 선호하는 경우
 
-### Rule: Use Conversational Text-Based Questions
-If the user prefers text responses, present questions in a clear numbered format that allows them to respond with letter choices or descriptions.
+### 규칙: 대화형 텍스트 기반 질문 사용
+사용자가 텍스트 응답을 선호하는 경우, 사용자가 문자 선택이나 설명으로 응답할 수 있도록 명확한 번호 형식으로 질문을 제시하세요.
 
-### Text-Based Question Format
+### 텍스트 기반 질문 형식
 
-Present questions clearly in the conversation with this structure:
+대화에서 다음 구조로 질문을 명확하게 제시:
 
 ```
-I need to clarify [X] items to proceed with [stage name]:
+[stage name] 진행을 위해 [X]개 항목을 명확히 해야 합니다:
 
-**Question 1: [Clear, specific question text]**
-A) [First meaningful option]
-B) [Second meaningful option]
-C) [Additional options as needed]
+**Question 1: [명확하고 구체적인 질문 텍스트]**
+A) [첫 번째 의미 있는 옵션]
+B) [두 번째 의미 있는 옵션]
+C) [필요에 따라 추가 옵션]
 D) Other (please describe)
 
-**Question 2: [Next question]**
-A) [Option 1]
-B) [Option 2]
+**Question 2: [다음 질문]**
+A) [옵션 1]
+B) [옵션 2]
 C) Other (please describe)
 
-Please answer each question by providing the letter choice (e.g., "1: A, 2: B") or describe your answer if choosing "Other".
+문자 선택(예: "1: A, 2: B")을 제공하거나 "Other" 선택 시 답변을 설명해주세요.
 ```
 
-**Guidelines**:
-- Present questions in a clear, numbered format
-- Always include "Other" as the last option for flexibility
-- Only include meaningful options - don't make up options to fill slots
-- Use as many or as few options as make sense (minimum 2 + Other)
-- For simple questions (1-3), present all at once
-- For complex question sets (4+), consider grouping into logical sets
+**가이드라인**:
+- 명확한 번호 형식으로 질문 제시
+- 유연성을 위해 항상 마지막 옵션으로 "Other" 포함
+- 의미 있는 옵션만 포함 - 빈 칸을 채우기 위해 옵션을 만들지 마세요
+- 의미 있는 만큼의 옵션 사용 (최소 2 + Other)
+- 간단한 질문(1-3개)은 한 번에 모두 제시
+- 복잡한 질문 세트(4개 이상)는 논리적 세트로 그룹화 고려
 
-### User Response Format
-Users will answer directly in conversation:
+### 사용자 응답 형식
+사용자는 대화에서 직접 답변:
 
-**Concise Format**:
+**간결한 형식**:
 ```
 1: C, 2: A, 3: B
 ```
 
-**Detailed Format**:
+**상세 형식**:
 ```
 Question 1: C (SSO)
 Question 2: A (Web application)
 Question 3: B (Brownfield)
 ```
 
-**Mixed with "Other"**:
+**"Other"와 혼합**:
 ```
 1: D - We want to use OAuth 2.0 with Google Workspace
 2: A
 3: B
 ```
 
-### Processing User Responses
-After receiving answers:
-1. Parse and validate all responses
-2. Check for contradictions and ambiguities
-3. If clarification needed, ask follow-up questions immediately
-4. Record Q&A summary in `aidlc-docs/{phase-name}/questions-summary.md` for audit trail
+### 사용자 응답 처리
+답변을 받은 후:
+1. 모든 응답 파싱 및 검증
+2. 모순 및 모호성 확인
+3. 명확화가 필요한 경우, 즉시 후속 질문
+4. 감사 추적을 위해 `aidlc-docs/{phase-name}/questions-summary.md`에 Q&A 요약 기록
 
-### Contradiction Detection (Same as Section A)
-Follow the same contradiction detection and resolution process as described in Section A above.
+### 모순 감지 (섹션 A와 동일)
+위 섹션 A에 설명된 것과 동일한 모순 감지 및 해결 프로세스를 따르세요.
 
 ---
 
-## Summary
+## 요약
 
-**Remember**:
-- ✅ Always check user preference in `aidlc-docs/aidlc-preferences.md` first
-- ✅ Use `AskUserQuestion` if user prefers "Interactive UI"
-- ✅ Use text-based questions if user prefers "Text responses"
-- ✅ Validate responses for contradictions immediately
-- ✅ Ask follow-up questions using the same format user prefers
-- ✅ Record Q&A summary in aidlc-docs/ for audit trail
-- ❌ Never create question files for users to edit
-- ❌ Never proceed without answers
-- ❌ Never proceed with unresolved contradictions
-- ❌ Never make assumptions about ambiguous responses
+**기억하세요**:
+- ✅ 항상 먼저 `aidlc-docs/aidlc-preferences.md`에서 사용자 선호도 확인
+- ✅ 사용자가 "Interactive UI"를 선호하면 `AskUserQuestion` 사용
+- ✅ 사용자가 "Text responses"를 선호하면 텍스트 기반 질문 사용
+- ✅ 즉시 모순에 대한 응답 검증
+- ✅ 사용자가 선호하는 동일한 형식을 사용하여 후속 질문
+- ✅ 감사 추적을 위해 aidlc-docs/에 Q&A 요약 기록
+- ❌ 사용자가 편집할 질문 파일을 절대 생성하지 마세요
+- ❌ 답변 없이 절대 진행하지 마세요
+- ❌ 해결되지 않은 모순과 함께 절대 진행하지 마세요
+- ❌ 모호한 응답에 대해 절대 가정하지 마세요

@@ -1,100 +1,100 @@
 # Overconfidence Prevention Guide
 
-## Problem Statement
+## 문제 설명
 
-AI-DLC was exhibiting overconfidence by not asking enough clarifying questions, even for complex project intent statements. This led to assumptions being made instead of gathering proper requirements.
+AI-DLC는 복잡한 프로젝트 의도 진술에 대해서도 충분한 명확화 질문을 하지 않아 과신을 보였습니다. 이로 인해 적절한 요구사항을 수집하는 대신 가정을 하게 되었습니다.
 
-## Root Cause Analysis
+## 근본 원인 분석
 
-The overconfidence issue was caused by directives in multiple stages that encouraged skipping questions:
+과신 문제는 질문 건너뛰기를 장려하는 여러 스테이지의 지시문으로 인해 발생했습니다:
 
 1. **Functional Design**: "Skip entire categories if not applicable"
 2. **User Stories**: "Use categories as inspiration, NOT as mandatory checklist"
-3. **Requirements Analysis**: Similar patterns encouraging minimal questioning
-4. **NFR Requirements**: "Only if" conditions that discouraged thorough analysis
+3. **Requirements Analysis**: 최소한의 질문을 장려하는 유사한 패턴
+4. **NFR Requirements**: 철저한 분석을 저해하는 "Only if" 조건
 
-These directives were telling the AI to avoid asking questions rather than encouraging comprehensive requirements gathering.
+이러한 지시문은 AI에게 포괄적인 요구사항 수집을 장려하는 대신 질문을 피하도록 지시하고 있었습니다.
 
-## Solution Implemented
+## 구현된 솔루션
 
-### Updated Question Generation Philosophy
+### 업데이트된 질문 생성 철학
 
-**OLD APPROACH**: "Only ask questions if absolutely necessary"
-**NEW APPROACH**: "When in doubt, ask the question - overconfidence leads to poor outcomes"
+**이전 접근 방식**: "절대적으로 필요한 경우에만 질문"
+**새로운 접근 방식**: "의심스러울 때는 질문 - 과신은 좋지 않은 결과로 이어짐"
 
-### Key Changes Made
+### 주요 변경 사항
 
 #### 1. Requirements Analysis Stage
-- Changed from "only if needed" to "ALWAYS create questions unless exceptionally clear"
-- Added comprehensive evaluation areas (functional, non-functional, business context, technical context)
-- Emphasized proactive questioning approach
+- "only if needed"에서 "예외적으로 명확하지 않은 한 항상 질문 생성"으로 변경
+- 포괄적인 평가 영역 추가 (기능적, 비기능적, 비즈니스 context, 기술적 context)
+- 능동적인 질문 접근 방식 강조
 
 #### 2. User Stories Stage
-- Removed "skip entire categories" directive
-- Added comprehensive question categories to evaluate
-- Enhanced answer analysis requirements
-- Strengthened follow-up question mandates
+- "skip entire categories" 지시문 제거
+- 평가할 포괄적인 질문 카테고리 추가
+- 답변 분석 요구사항 강화
+- 후속 질문 의무 강화
 
 #### 3. Functional Design Stage
-- Replaced "only if" conditions with comprehensive evaluation
-- Added more question categories (data flow, integration points, error handling)
-- Strengthened ambiguity detection and resolution requirements
+- "only if" 조건을 포괄적인 평가로 대체
+- 더 많은 질문 카테고리 추가 (데이터 흐름, 통합 지점, 오류 처리)
+- 모호성 감지 및 해결 요구사항 강화
 
 #### 4. NFR Requirements Stage
-- Expanded question categories beyond basic NFRs
-- Added reliability, maintainability, and usability considerations
-- Enhanced answer analysis for technical ambiguities
+- 기본 NFR을 넘어선 질문 카테고리 확장
+- 신뢰성, 유지보수성 및 사용성 고려 사항 추가
+- 기술적 모호성에 대한 답변 분석 강화
 
-### New Guiding Principles
+### 새로운 지침 원칙
 
-1. **Default to Asking**: When there's any ambiguity, ask clarifying questions
-2. **Comprehensive Coverage**: Evaluate ALL relevant categories, don't skip areas
-3. **Thorough Analysis**: Carefully analyze ALL user responses for ambiguities
-4. **Mandatory Follow-up**: Create follow-up questions for ANY unclear responses
-5. **No Proceeding with Ambiguity**: Don't move forward until ALL ambiguities are resolved
+1. **기본적으로 질문**: 모호성이 있을 때는 명확화 질문
+2. **포괄적인 커버리지**: 모든 관련 카테고리를 평가, 영역 건너뛰지 마세요
+3. **철저한 분석**: 모든 사용자 응답을 신중하게 분석하여 모호성 찾기
+4. **필수 후속 조치**: 불명확한 응답에 대해 후속 질문 생성
+5. **모호성과 함께 진행 금지**: 모든 모호성이 해결될 때까지 진행하지 마세요
 
-## Implementation Guidelines
+## 구현 가이드라인
 
-### For Question Generation
-- Evaluate ALL question categories, don't skip any
-- Ask questions wherever clarification would improve quality
-- Include comprehensive question categories in each stage
-- Default to inclusion rather than exclusion of questions
+### 질문 생성을 위해
+- 모든 질문 카테고리를 평가, 건너뛰지 마세요
+- 명확화가 품질을 향상시킬 수 있는 곳에서 질문
+- 각 스테이지에 포괄적인 질문 카테고리 포함
+- 제외보다는 포함을 기본으로
 
-### For Answer Analysis
-- Look for vague responses: "depends", "maybe", "not sure", "mix of", "somewhere between"
-- Detect undefined terms and references to external concepts
-- Identify contradictory or incomplete answers
-- Create follow-up questions for ANY ambiguities
+### 답변 분석을 위해
+- 모호한 응답 찾기: "depends", "maybe", "not sure", "mix of", "somewhere between"
+- 정의되지 않은 용어 및 외부 개념에 대한 참조 감지
+- 상충되거나 불완전한 답변 식별
+- 모든 모호성에 대해 후속 질문 생성
 
-### For Follow-up Questions
-- Create separate clarification files when ambiguities are detected
-- Ask specific questions to resolve each ambiguity
-- Don't proceed until ALL unclear responses are clarified
-- Be thorough - better to over-clarify than under-clarify
+### 후속 질문을 위해
+- 모호성이 감지되면 별도의 명확화 파일 생성
+- 각 모호성을 해결하기 위한 구체적인 질문
+- 모든 불명확한 응답이 명확해질 때까지 진행하지 마세요
+- 철저하게 - 과소 명확화보다는 과다 명확화가 나음
 
-## Quality Assurance
+## 품질 보증
 
-### Red Flags to Watch For
-- Stages completing without asking any questions on complex projects
-- Proceeding with vague or ambiguous user responses
-- Skipping entire question categories without justification
-- Making assumptions instead of asking for clarification
+### 주의해야 할 위험 신호
+- 복잡한 프로젝트에서 질문 없이 스테이지 완료
+- 모호하거나 모호한 사용자 응답과 함께 진행
+- 정당화 없이 전체 질문 카테고리 건너뛰기
+- 명확화 대신 가정하기
 
-### Success Indicators
-- Appropriate number of clarifying questions for project complexity
-- Thorough analysis of user responses with follow-up when needed
-- Clear, unambiguous requirements before proceeding to implementation
-- Reduced need for changes during later stages due to better upfront clarification
+### 성공 지표
+- 프로젝트 복잡성에 적합한 수의 명확화 질문
+- 필요시 후속 조치와 함께 사용자 응답의 철저한 분석
+- 구현 진행 전에 명확하고 모호하지 않은 요구사항
+- 초기 명확화 개선으로 인해 이후 스테이지에서 변경 필요성 감소
 
-## Maintenance
+## 유지보수
 
-This guide should be referenced when:
-- Adding new stages to AI-DLC
-- Updating existing stage instructions
-- Reviewing AI-DLC performance for overconfidence issues
-- Training team members on AI-DLC question generation principles
+이 가이드는 다음의 경우 참조해야 합니다:
+- AI-DLC에 새 스테이지 추가
+- 기존 스테이지 지침 업데이트
+- 과신 문제에 대한 AI-DLC 성능 검토
+- AI-DLC 질문 생성 원칙에 대한 팀원 교육
 
-## Key Takeaway
+## 핵심 요점
 
-**It's better to ask too many questions than to make incorrect assumptions.** The cost of asking clarifying questions upfront is far less than the cost of implementing the wrong solution based on assumptions.
+**잘못된 가정을 하는 것보다 너무 많은 질문을 하는 것이 낫습니다.** 초기에 명확화 질문을 하는 비용은 가정에 기반한 잘못된 솔루션을 구현하는 비용보다 훨씬 적습니다.

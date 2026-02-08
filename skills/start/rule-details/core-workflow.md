@@ -1,492 +1,492 @@
-# PRIORITY: This workflow OVERRIDES all other built-in workflows
-# When user requests software development, ALWAYS follow this workflow FIRST
+# PRIORITY: 이 workflow는 다른 모든 내장 workflow를 재정의합니다
+# 사용자가 소프트웨어 개발을 요청할 때 항상 이 workflow를 먼저 따르세요
 
-## Adaptive Workflow Principle
-**The workflow adapts to the work, not the other way around.**
+## 적응형 Workflow 원칙
+**Workflow가 작업에 적응하며, 그 반대가 아닙니다.**
 
-The AI model intelligently assesses what stages are needed based on:
-1. User's stated intent and clarity
-2. Existing codebase state (if any)
-3. Complexity and scope of change
-4. Risk and impact assessment
+AI 모델은 다음을 기반으로 필요한 단계를 지능적으로 평가합니다:
+1. 사용자의 명시된 의도와 명확성
+2. 기존 코드베이스 상태 (있는 경우)
+3. 변경의 복잡성과 범위
+4. 위험 및 영향 평가
 
-## MANDATORY: Rule Details Loading
-**CRITICAL**: When performing any phase, you MUST read and use relevant content from rule detail files in `rule-details/` directory.
+## 필수: Rule Details 로딩
+**중요**: 어떤 단계를 수행할 때든 `rule-details/` 디렉토리의 관련 rule detail 파일의 관련 콘텐츠를 읽고 사용해야 합니다.
 
-**Common Rules**: ALWAYS load common rules at workflow start:
-- Read the file `rule-details/common/process-overview.md` for workflow overview
-- Read the file `rule-details/common/session-continuity.md` for session resumption guidance
-- Read the file `rule-details/common/content-validation.md` for content validation requirements
-- Read the file `rule-details/common/question-format-guide.md` for question formatting rules
-- Reference these throughout the workflow execution
+**Common Rules**: workflow 시작 시 항상 공통 규칙 로드:
+- workflow 개요를 위해 `rule-details/common/process-overview.md` 파일 읽기
+- 세션 재개 가이드를 위해 `rule-details/common/session-continuity.md` 파일 읽기
+- 콘텐츠 검증 요구사항을 위해 `rule-details/common/content-validation.md` 파일 읽기
+- 질문 포맷팅 규칙을 위해 `rule-details/common/question-format-guide.md` 파일 읽기
+- workflow 실행 전체에서 이들을 참조
 
-## MANDATORY: Content Validation
-**CRITICAL**: Before creating ANY file, you MUST validate content according to `rule-details/common/content-validation.md` rules:
-- Validate Mermaid diagram syntax
-- Validate ASCII art diagrams (see `rule-details/common/ascii-diagram-standards.md`)
-- Escape special characters properly
-- Provide text alternatives for complex visual content
-- Test content parsing compatibility
+## 필수: 콘텐츠 검증
+**중요**: 어떤 파일을 생성하기 전에 `rule-details/common/content-validation.md` 규칙에 따라 콘텐츠를 검증해야 합니다:
+- Mermaid 다이어그램 구문 검증
+- ASCII 아트 다이어그램 검증 (`rule-details/common/ascii-diagram-standards.md` 참조)
+- 특수 문자 적절히 이스케이프
+- 복잡한 시각적 콘텐츠에 대한 텍스트 대안 제공
+- 콘텐츠 파싱 호환성 테스트
 
-## MANDATORY: Question Format
-**CRITICAL**: When asking questions at any phase, you MUST follow question format guidelines.
+## 필수: 질문 형식
+**중요**: 어떤 단계에서든 질문할 때 질문 형식 가이드라인을 따라야 합니다.
 
-**See `rule-details/common/question-format-guide.md` for complete question formatting rules including**:
-- How to ask questions directly in conversation (chat-based)
-- Question grouping for complex question sets
-- Answer validation and ambiguity resolution
+**완전한 질문 포맷팅 규칙은 `rule-details/common/question-format-guide.md`를 참조하세요**:
+- 대화에서 직접 질문하는 방법 (chat 기반)
+- 복잡한 질문 세트를 위한 질문 그룹화
+- 답변 검증 및 모호성 해결
 
-## MANDATORY: Custom Welcome Message
-**CRITICAL**: When starting ANY software development request, you MUST display the welcome message.
+## 필수: 맞춤 환영 메시지
+**중요**: 어떤 소프트웨어 개발 요청을 시작할 때든 환영 메시지를 표시해야 합니다.
 
-**How to Display Welcome Message**:
-1. Read the file `rule-details/common/welcome-message.md`
-2. Display the complete message to the user
-3. This should only be done ONCE at the start of a new workflow
-4. Do NOT load this file in subsequent interactions to save context space
+**환영 메시지를 표시하는 방법**:
+1. `rule-details/common/welcome-message.md` 파일 읽기
+2. 완전한 메시지를 사용자에게 표시
+3. 새 workflow 시작 시 한 번만 수행
+4. context 공간을 절약하기 위해 후속 상호작용에서 이 파일을 로드하지 마세요
 
-# Adaptive Software Development Workflow
+# 적응형 소프트웨어 개발 Workflow
 
 ---
 
 # INCEPTION PHASE
 
-**Purpose**: Planning, requirements gathering, and architectural decisions
+**목적**: 계획, 요구사항 수집 및 아키텍처 결정
 
-**Focus**: Determine WHAT to build and WHY
+**초점**: 무엇을 구축할지와 왜 구축할지 결정
 
-**Stages in INCEPTION PHASE**:
-- Workspace Detection (ALWAYS)
-- Reverse Engineering (CONDITIONAL - Brownfield only)
-- Requirements Analysis (ALWAYS - Adaptive depth)
-- User Stories (CONDITIONAL)
-- Workflow Planning (ALWAYS)
-- Application Design (CONDITIONAL)
-- Units Generation (CONDITIONAL)
+**INCEPTION PHASE의 단계**:
+- Workspace Detection (항상)
+- Reverse Engineering (조건부 - Brownfield만)
+- Requirements Analysis (항상 - 적응형 깊이)
+- User Stories (조건부)
+- Workflow Planning (항상)
+- Application Design (조건부)
+- Units Generation (조건부)
 
 ---
 
-## Workspace Detection (ALWAYS EXECUTE)
+## Workspace Detection (항상 실행)
 
-1. **MANDATORY**: Log initial user request in audit.md with complete raw input
-2. Read the file `rule-details/inception/workspace-detection.md` and follow all steps
-3. Execute workspace detection:
-   - Check for existing aidlc-state.md (resume if found)
-   - Scan workspace for existing code
-   - Determine if brownfield or greenfield
-   - Check for existing reverse engineering artifacts
-4. Determine next phase: Reverse Engineering (if brownfield and no artifacts) OR Requirements Analysis
-5. **MANDATORY**: Log findings in audit.md
-6. Present completion message to user (see workspace-detection.md for message formats)
-7. Automatically proceed to next phase
+1. **필수**: audit.md에 완전한 원본 입력과 함께 초기 사용자 요청 로그
+2. `rule-details/inception/workspace-detection.md` 파일을 읽고 모든 단계를 따름
+3. workspace 감지 실행:
+   - 기존 aidlc-state.md 확인 (발견되면 재개)
+   - 기존 코드에 대한 workspace 스캔
+   - Brownfield 또는 Greenfield 확인
+   - 기존 reverse engineering 아티팩트 확인
+4. 다음 단계 결정: Reverse Engineering (Brownfield이고 아티팩트가 없는 경우) 또는 Requirements Analysis
+5. **필수**: audit.md에 발견 사항 로그
+6. 사용자에게 완료 메시지 제시 (메시지 형식은 workspace-detection.md 참조)
+7. 자동으로 다음 단계로 진행
 
-## Reverse Engineering (CONDITIONAL - Brownfield Only)
+## Reverse Engineering (조건부 - Brownfield만)
 
-**Execute IF**:
-- Existing codebase detected
-- No previous reverse engineering artifacts found
+**다음의 경우 실행**:
+- 기존 코드베이스 감지됨
+- 이전 reverse engineering 아티팩트가 발견되지 않음
 
-**Skip IF**:
-- Greenfield project
-- Previous reverse engineering artifacts exist
+**다음의 경우 건너뜀**:
+- Greenfield 프로젝트
+- 이전 reverse engineering 아티팩트가 존재함
 
-**Execution**:
-1. **MANDATORY**: Log start of reverse engineering in audit.md
-2. Read the file `rule-details/inception/reverse-engineering.md` and follow all steps
-3. Execute reverse engineering:
-   - Analyze all packages and components
-   - Generate a business overview of the whole system covering the business transactions
-   - Generate architecture documentation
-   - Generate code structure documentation
-   - Generate API documentation
-   - Generate component inventory
-   - Generate Interaction Diagrams depicting how business transactions are implemented across components
-   - Generate technology stack documentation
-   - Generate dependencies documentation
+**실행**:
+1. **필수**: audit.md에 reverse engineering 시작 로그
+2. `rule-details/inception/reverse-engineering.md` 파일을 읽고 모든 단계를 따름
+3. reverse engineering 실행:
+   - 모든 패키지 및 컴포넌트 분석
+   - 비즈니스 트랜잭션을 다루는 전체 시스템의 비즈니스 개요 생성
+   - 아키텍처 문서 생성
+   - 코드 구조 문서 생성
+   - API 문서 생성
+   - 컴포넌트 인벤토리 생성
+   - 컴포넌트 간 비즈니스 트랜잭션이 구현되는 방법을 묘사하는 Interaction Diagrams 생성
+   - 기술 스택 문서 생성
+   - 의존성 문서 생성
 
-4. **Wait for Explicit Approval**: Present detailed completion message (see reverse-engineering.md for message format) - DO NOT PROCEED until user confirms
-5. **MANDATORY**: Log user's response in audit.md with complete raw input
+4. **명시적 승인 대기**: 상세한 완료 메시지 제시 (메시지 형식은 reverse-engineering.md 참조) - 사용자가 확인할 때까지 진행하지 마세요
+5. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
 
-## Requirements Analysis (ALWAYS EXECUTE - Adaptive Depth)
+## Requirements Analysis (항상 실행 - 적응형 깊이)
 
-**Always executes** but depth varies based on request clarity and complexity:
-- **Minimal**: Simple, clear request - just document intent analysis
-- **Standard**: Normal complexity - gather functional and non-functional requirements
-- **Comprehensive**: Complex, high-risk - detailed requirements with traceability
+**항상 실행** 되지만 깊이는 요청 명확성과 복잡성에 따라 달라짐:
+- **최소**: 간단하고 명확한 요청 - 의도 분석만 문서화
+- **표준**: 일반 복잡성 - 기능 및 NFR 수집
+- **포괄적**: 복잡하고 고위험 - 추적성이 있는 상세한 요구사항
 
-**Execution**:
-1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Read the file `rule-details/inception/requirements-analysis.md` and follow all steps
-3. Execute requirements analysis:
-   - Load reverse engineering artifacts (if brownfield)
-   - Analyze user request (intent analysis)
-   - Determine requirements depth needed
-   - Assess current requirements
-   - Ask clarifying questions directly in conversation (if needed)
-   - Generate requirements document
-4. Execute at appropriate depth (minimal/standard/comprehensive)
-5. **Wait for Explicit Approval**: Follow approval format from requirements-analysis.md detailed steps - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/inception/requirements-analysis.md` 파일을 읽고 모든 단계를 따름
+3. 요구사항 분석 실행:
+   - reverse engineering 아티팩트 로드 (Brownfield인 경우)
+   - 사용자 요청 분석 (의도 분석)
+   - 필요한 요구사항 깊이 결정
+   - 현재 요구사항 평가
+   - 대화에서 직접 명확화 질문 (필요한 경우)
+   - 요구사항 문서 생성
+4. 적절한 깊이로 실행 (최소/표준/포괄적)
+5. **명시적 승인 대기**: requirements-analysis.md 상세 단계의 승인 형식 따르기 - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
 
-## User Stories (CONDITIONAL)
+## User Stories (조건부)
 
-**INTELLIGENT ASSESSMENT**: Use multi-factor analysis to determine if user stories add value:
+**지능형 평가**: 다중 요인 분석을 사용하여 user stories가 가치를 추가하는지 확인:
 
-**ALWAYS Execute IF** (High Priority Indicators):
-- New user-facing features or functionality
-- Changes affecting user workflows or interactions
-- Multiple user types or personas involved
-- Complex business requirements with acceptance criteria needs
-- Cross-functional team collaboration required
-- Customer-facing API or service changes
-- New product capabilities or enhancements
+**항상 실행** (높은 우선순위 지표):
+- 새로운 사용자 대면 기능 또는 기능성
+- 사용자 workflow 또는 상호작용에 영향을 미치는 변경
+- 여러 사용자 유형 또는 페르소나 관련
+- 수락 기준이 필요한 복잡한 비즈니스 요구사항
+- 교차 기능 팀 협업 필요
+- 고객 대면 API 또는 서비스 변경
+- 새로운 제품 기능 또는 개선
 
-**LIKELY Execute IF** (Medium Priority - Assess Complexity):
-- Modifications to existing user-facing features
-- Backend changes that indirectly affect user experience
-- Integration work that impacts user workflows
-- Performance improvements with user-visible benefits
-- Security enhancements affecting user interactions
-- Data model changes affecting user data or reports
+**실행 가능성 높음** (중간 우선순위 - 복잡성 평가):
+- 기존 사용자 대면 기능 수정
+- 사용자 경험에 간접적으로 영향을 미치는 백엔드 변경
+- 사용자 workflow에 영향을 미치는 통합 작업
+- 사용자에게 보이는 이점이 있는 성능 개선
+- 사용자 상호작용에 영향을 미치는 보안 강화
+- 사용자 데이터 또는 보고서에 영향을 미치는 데이터 모델 변경
 
-**COMPLEXITY-BASED ASSESSMENT**: For medium priority cases, execute user stories if:
-- Request involves multiple components or services
-- Changes span multiple user touchpoints
-- Business logic is complex or has multiple scenarios
-- Requirements have ambiguity that stories could clarify
-- Implementation affects multiple user journeys
-- Change has significant business impact or risk
+**복잡성 기반 평가**: 중간 우선순위의 경우 다음의 경우 user stories 실행:
+- 요청이 여러 컴포넌트 또는 서비스를 포함
+- 변경이 여러 사용자 터치포인트에 걸쳐 있음
+- 비즈니스 로직이 복잡하거나 여러 시나리오가 있음
+- 요구사항에 stories가 명확히 할 수 있는 모호성이 있음
+- 구현이 여러 사용자 여정에 영향을 미침
+- 변경이 중요한 비즈니스 영향 또는 위험이 있음
 
-**SKIP ONLY IF** (Low Priority - Simple Cases):
-- Pure internal refactoring with zero user impact
-- Simple bug fixes with clear, isolated scope
-- Infrastructure changes with no user-facing effects
-- Technical debt cleanup with no functional changes
-- Developer tooling or build process improvements
-- Documentation-only updates
+**다음의 경우에만 건너뜀** (낮은 우선순위 - 간단한 경우):
+- 사용자 영향이 전혀 없는 순수 내부 리팩토링
+- 명확하고 격리된 범위의 간단한 버그 수정
+- 사용자 대면 효과가 없는 인프라 변경
+- 기능 변경이 없는 기술 부채 정리
+- 개발자 도구 또는 빌드 프로세스 개선
+- 문서 전용 업데이트
 
-**ASSESSMENT CRITERIA**: When in doubt, favor inclusion of user stories for:
-- Requests with business stakeholder involvement
-- Changes requiring user acceptance testing
-- Features with multiple implementation approaches
-- Work that benefits from shared team understanding
-- Projects where requirements clarity is valuable
+**평가 기준**: 의심스러울 때 다음을 위해 user stories 포함을 선호:
+- 비즈니스 이해관계자가 참여하는 요청
+- 사용자 수락 테스트가 필요한 변경
+- 여러 구현 접근 방식이 있는 기능
+- 공유된 팀 이해가 도움이 되는 작업
+- 요구사항 명확성이 가치 있는 프로젝트
 
-**ASSESSMENT PROCESS**:
-1. Analyze request complexity and scope
-2. Identify user impact (direct or indirect)
-3. Evaluate business context and stakeholder needs
-4. Consider team collaboration benefits
-5. Default to inclusion for borderline cases
+**평가 프로세스**:
+1. 요청 복잡성 및 범위 분석
+2. 사용자 영향 식별 (직접 또는 간접)
+3. 비즈니스 context 및 이해관계자 요구사항 평가
+4. 팀 협업 이점 고려
+5. 경계선 경우 포함 기본값
 
-**Note**: If Requirements Analysis executed, Stories can reference and build upon those requirements.
+**참고**: Requirements Analysis가 실행된 경우 Stories는 해당 요구사항을 참조하고 구축할 수 있습니다.
 
-**User Stories has two parts within one stage**:
-1. **Part 1 - Planning**: Create story plan with questions, collect answers, analyze for ambiguities, get approval
-2. **Part 2 - Generation**: Execute approved plan to generate stories and personas
+**User Stories는 한 단계 내에 두 부분이 있습니다**:
+1. **Part 1 - 계획**: 질문이 있는 story 계획 생성, 답변 수집, 모호성 분석, 승인 받기
+2. **Part 2 - 생성**: 승인된 계획을 실행하여 stories 및 personas 생성
 
-**Execution**:
-1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Read the file `rule-details/inception/user-stories.md` and follow all steps
-3. **MANDATORY**: Perform intelligent assessment (Step 1 in user-stories.md) to validate user stories are needed
-4. Load reverse engineering artifacts (if brownfield)
-5. If Requirements exist, reference them when creating stories
-6. Execute at appropriate depth (minimal/standard/comprehensive)
-7. **PART 1 - Planning**: Create story plan with questions, ask questions directly in conversation, wait for user answers, analyze for ambiguities, get approval
-8. **PART 2 - Generation**: Execute approved plan to generate stories and personas
-9. **Wait for Explicit Approval**: Follow approval format from user-stories.md detailed steps - DO NOT PROCEED until user confirms
-10. **MANDATORY**: Log user's response in audit.md with complete raw input
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/inception/user-stories.md` 파일을 읽고 모든 단계를 따름
+3. **필수**: user stories가 필요한지 검증하기 위해 지능형 평가 수행 (user-stories.md의 1단계)
+4. reverse engineering 아티팩트 로드 (Brownfield인 경우)
+5. Requirements가 존재하는 경우 stories를 생성할 때 참조
+6. 적절한 깊이로 실행 (최소/표준/포괄적)
+7. **PART 1 - 계획**: 질문이 있는 story 계획 생성, 대화에서 직접 질문, 사용자 답변 대기, 모호성 분석, 승인 받기
+8. **PART 2 - 생성**: 승인된 계획을 실행하여 stories 및 personas 생성
+9. **명시적 승인 대기**: user-stories.md 상세 단계의 승인 형식 따르기 - 사용자가 확인할 때까지 진행하지 마세요
+10. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
 
-## Workflow Planning (ALWAYS EXECUTE)
+## Workflow Planning (항상 실행)
 
-1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Read the file `rule-details/inception/workflow-planning.md` and follow all steps
-3. **MANDATORY**: Read the file `rule-details/common/content-validation.md` for validation rules
-4. Load all prior context:
-   - Reverse engineering artifacts (if brownfield)
-   - Intent analysis
-   - Requirements (if executed)
-   - User stories (if executed)
-5. Execute workflow planning:
-   - Determine which phases to execute
-   - Determine depth level for each phase
-   - Create multi-package change sequence (if brownfield)
-   - Generate workflow visualization (VALIDATE Mermaid syntax before writing)
-6. **MANDATORY**: Validate all content before file creation per content-validation.md rules
-7. **Wait for Explicit Approval**: Present recommendations using language from workflow-planning.md Step 9, emphasizing user control to override recommendations - DO NOT PROCEED until user confirms
-8. **MANDATORY**: Log user's response in audit.md with complete raw input
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/inception/workflow-planning.md` 파일을 읽고 모든 단계를 따름
+3. **필수**: 검증 규칙을 위해 `rule-details/common/content-validation.md` 파일 읽기
+4. 모든 이전 context 로드:
+   - reverse engineering 아티팩트 (Brownfield인 경우)
+   - 의도 분석
+   - Requirements (실행된 경우)
+   - User stories (실행된 경우)
+5. workflow 계획 실행:
+   - 실행할 단계 결정
+   - 각 단계의 깊이 수준 결정
+   - 다중 패키지 변경 순서 생성 (Brownfield인 경우)
+   - workflow 시각화 생성 (작성 전 Mermaid 구문 검증)
+6. **필수**: content-validation.md 규칙에 따라 파일 생성 전 모든 콘텐츠 검증
+7. **명시적 승인 대기**: workflow-planning.md 9단계의 언어를 사용하여 권장 사항 제시, 권장 사항을 재정의할 수 있는 사용자 제어 강조 - 사용자가 확인할 때까지 진행하지 마세요
+8. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
 
-## Application Design (CONDITIONAL)
+## Application Design (조건부)
 
-**Execute IF**:
-- New components or services needed
-- Component methods and business rules need definition
-- Service layer design required
-- Component dependencies need clarification
+**다음의 경우 실행**:
+- 새로운 컴포넌트 또는 서비스 필요
+- 컴포넌트 메서드 및 비즈니스 규칙 정의 필요
+- 서비스 레이어 설계 필요
+- 컴포넌트 의존성 명확화 필요
 
-**Skip IF**:
-- Changes within existing component boundaries
-- No new components or methods
-- Pure implementation changes
+**다음의 경우 건너뜀**:
+- 기존 컴포넌트 경계 내의 변경
+- 새로운 컴포넌트 또는 메서드 없음
+- 순수 구현 변경
 
-**Execution**:
-1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Read the file `rule-details/inception/application-design.md` and follow all steps
-3. Load reverse engineering artifacts (if brownfield)
-4. Execute at appropriate depth (minimal/standard/comprehensive)
-5. **Wait for Explicit Approval**: Present detailed completion message (see application-design.md for message format) - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/inception/application-design.md` 파일을 읽고 모든 단계를 따름
+3. reverse engineering 아티팩트 로드 (Brownfield인 경우)
+4. 적절한 깊이로 실행 (최소/표준/포괄적)
+5. **명시적 승인 대기**: 상세한 완료 메시지 제시 (메시지 형식은 application-design.md 참조) - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
 
-## Units Generation (CONDITIONAL)
+## Units Generation (조건부)
 
-**Execute IF**:
-- System needs decomposition into multiple units of work
-- Multiple services or modules required
-- Complex system requiring structured breakdown
+**다음의 경우 실행**:
+- 시스템이 여러 작업 단위로 분해 필요
+- 여러 서비스 또는 모듈 필요
+- 구조화된 분해가 필요한 복잡한 시스템
 
-**Skip IF**:
-- Single simple unit
-- No decomposition needed
-- Straightforward single-component implementation
+**다음의 경우 건너뜀**:
+- 단일 간단한 단위
+- 분해 불필요
+- 간단한 단일 컴포넌트 구현
 
-**Execution**:
-1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Read the file `rule-details/inception/units-generation.md` and follow all steps
-3. Load reverse engineering artifacts (if brownfield)
-4. Execute at appropriate depth (minimal/standard/comprehensive)
-5. **Wait for Explicit Approval**: Present detailed completion message (see units-generation.md for message format) - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/inception/units-generation.md` 파일을 읽고 모든 단계를 따름
+3. reverse engineering 아티팩트 로드 (Brownfield인 경우)
+4. 적절한 깊이로 실행 (최소/표준/포괄적)
+5. **명시적 승인 대기**: 상세한 완료 메시지 제시 (메시지 형식은 units-generation.md 참조) - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
 
 ---
 
 # 🟢 CONSTRUCTION PHASE
 
-**Purpose**: Detailed design, NFR implementation, and code generation
+**목적**: 상세 설계, NFR 구현 및 코드 생성
 
-**Focus**: Determine HOW to build it
+**초점**: 어떻게 구축할지 결정
 
-**Stages in CONSTRUCTION PHASE**:
-- Per-Unit Loop (executes for each unit):
-  - Functional Design (CONDITIONAL, per-unit)
-  - NFR Requirements (CONDITIONAL, per-unit)
-  - NFR Design (CONDITIONAL, per-unit)
-  - Infrastructure Design (CONDITIONAL, per-unit)
-  - Code Generation (ALWAYS, per-unit)
-- Build and Test (ALWAYS - after all units complete)
+**CONSTRUCTION PHASE의 단계**:
+- 단위별 루프 (각 단위에 대해 실행):
+  - Functional Design (조건부, 단위별)
+  - NFR Requirements (조건부, 단위별)
+  - NFR Design (조건부, 단위별)
+  - Infrastructure Design (조건부, 단위별)
+  - Code Generation (항상, 단위별)
+- Build and Test (항상 - 모든 단위 완료 후)
 
-**Note**: Each unit is completed fully (design + code) before moving to the next unit.
-
----
-
-## Per-Unit Loop (Executes for Each Unit)
-
-**For each unit of work, execute the following stages in sequence:**
-
-### Functional Design (CONDITIONAL, per-unit)
-
-**Execute IF**:
-- New data models or schemas
-- Complex business logic
-- Business rules need detailed design
-
-**Skip IF**:
-- Simple logic changes
-- No new business logic
-
-**Execution**:
-1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Read the file `rule-details/construction/functional-design.md` and follow all steps
-3. Execute functional design for this unit
-4. **MANDATORY**: Present standardized 2-option completion message as defined in functional-design.md - DO NOT use emergent 3-option behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
-
-### NFR Requirements (CONDITIONAL, per-unit)
-
-**Execute IF**:
-- Performance requirements exist
-- Security considerations needed
-- Scalability concerns present
-- Tech stack selection required
-
-**Skip IF**:
-- No NFR requirements
-- Tech stack already determined
-
-**Execution**:
-1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Read the file `rule-details/construction/nfr-requirements.md` and follow all steps
-3. Execute NFR assessment for this unit
-4. **MANDATORY**: Present standardized 2-option completion message as defined in nfr-requirements.md - DO NOT use emergent behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
-
-### NFR Design (CONDITIONAL, per-unit)
-
-**Execute IF**:
-- NFR Requirements was executed
-- NFR patterns need to be incorporated
-
-**Skip IF**:
-- No NFR requirements
-- NFR Requirements Assessment was skipped
-
-**Execution**:
-1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Read the file `rule-details/construction/nfr-design.md` and follow all steps
-3. Execute NFR design for this unit
-4. **MANDATORY**: Present standardized 2-option completion message as defined in nfr-design.md - DO NOT use emergent behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
-
-### Infrastructure Design (CONDITIONAL, per-unit)
-
-**Execute IF**:
-- Infrastructure services need mapping
-- Deployment architecture required
-- Cloud resources need specification
-
-**Skip IF**:
-- No infrastructure changes
-- Infrastructure already defined
-
-**Execution**:
-1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Read the file `rule-details/construction/infrastructure-design.md` and follow all steps
-3. Execute infrastructure design for this unit
-4. **MANDATORY**: Present standardized 2-option completion message as defined in infrastructure-design.md - DO NOT use emergent behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
-
-### Code Generation (ALWAYS EXECUTE, per-unit)
-
-**Always executes for each unit**
-
-**Code Generation has two parts within one stage**:
-1. **Part 1 - Planning**: Create detailed code generation plan with explicit steps
-2. **Part 2 - Generation**: Execute approved plan to generate code, tests, and artifacts
-
-**Execution**:
-1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Read the file `rule-details/construction/code-generation.md` and follow all steps
-3. **PART 1 - Planning**: Create code generation plan with checkboxes, get user approval
-4. **PART 2 - Generation**: Execute approved plan to generate code for this unit
-5. **MANDATORY**: Present standardized 2-option completion message as defined in code-generation.md - DO NOT use emergent behavior
-6. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-7. **MANDATORY**: Log user's response in audit.md with complete raw input
+**참고**: 각 단위는 다음 단위로 이동하기 전에 완전히 완료됩니다 (설계 + 코드).
 
 ---
 
-## Build and Test (ALWAYS EXECUTE)
+## 단위별 루프 (각 단위에 대해 실행)
 
-1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Read the file `rule-details/construction/build-and-test.md` and follow all steps
-3. Generate comprehensive build and test instructions:
-   - Build instructions for all units
-   - Unit test execution instructions
-   - Integration test instructions (test interactions between units)
-   - Performance test instructions (if applicable)
-   - Additional test instructions as needed (contract tests, security tests, e2e tests)
-4. Create instruction files in build-and-test/ subdirectory: build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, performance-test-instructions.md, build-and-test-summary.md
-5. **Wait for Explicit Approval**: Ask: "**Build and test instructions complete. Ready to proceed to Operations stage?**" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+**각 작업 단위에 대해 다음 단계를 순서대로 실행:**
+
+### Functional Design (조건부, 단위별)
+
+**다음의 경우 실행**:
+- 새로운 데이터 모델 또는 스키마
+- 복잡한 비즈니스 로직
+- 비즈니스 규칙이 상세 설계 필요
+
+**다음의 경우 건너뜀**:
+- 간단한 로직 변경
+- 새로운 비즈니스 로직 없음
+
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/construction/functional-design.md` 파일을 읽고 모든 단계를 따름
+3. 이 단위에 대한 기능 설계 실행
+4. **필수**: functional-design.md에 정의된 표준화된 2옵션 완료 메시지 제시 - 3옵션 동작 사용하지 마세요
+5. **명시적 승인 대기**: 사용자는 "변경 요청" 또는 "다음 단계로 계속" 중 선택해야 함 - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
+
+### NFR Requirements (조건부, 단위별)
+
+**다음의 경우 실행**:
+- 성능 요구사항 존재
+- 보안 고려사항 필요
+- 확장성 우려 존재
+- 기술 스택 선택 필요
+
+**다음의 경우 건너뜀**:
+- NFR 요구사항 없음
+- 기술 스택이 이미 결정됨
+
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/construction/nfr-requirements.md` 파일을 읽고 모든 단계를 따름
+3. 이 단위에 대한 NFR 평가 실행
+4. **필수**: nfr-requirements.md에 정의된 표준화된 2옵션 완료 메시지 제시 - 창발적 동작 사용하지 마세요
+5. **명시적 승인 대기**: 사용자는 "변경 요청" 또는 "다음 단계로 계속" 중 선택해야 함 - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
+
+### NFR Design (조건부, 단위별)
+
+**다음의 경우 실행**:
+- NFR Requirements가 실행됨
+- NFR 패턴을 통합해야 함
+
+**다음의 경우 건너뜀**:
+- NFR 요구사항 없음
+- NFR Requirements Assessment가 건너뜀
+
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/construction/nfr-design.md` 파일을 읽고 모든 단계를 따름
+3. 이 단위에 대한 NFR 설계 실행
+4. **필수**: nfr-design.md에 정의된 표준화된 2옵션 완료 메시지 제시 - 창발적 동작 사용하지 마세요
+5. **명시적 승인 대기**: 사용자는 "변경 요청" 또는 "다음 단계로 계속" 중 선택해야 함 - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
+
+### Infrastructure Design (조건부, 단위별)
+
+**다음의 경우 실행**:
+- 인프라 서비스 매핑 필요
+- 배포 아키텍처 필요
+- 클라우드 리소스 명세 필요
+
+**다음의 경우 건너뜀**:
+- 인프라 변경 없음
+- 인프라가 이미 정의됨
+
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/construction/infrastructure-design.md` 파일을 읽고 모든 단계를 따름
+3. 이 단위에 대한 인프라 설계 실행
+4. **필수**: infrastructure-design.md에 정의된 표준화된 2옵션 완료 메시지 제시 - 창발적 동작 사용하지 마세요
+5. **명시적 승인 대기**: 사용자는 "변경 요청" 또는 "다음 단계로 계속" 중 선택해야 함 - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
+
+### Code Generation (항상 실행, 단위별)
+
+**각 단위에 대해 항상 실행**
+
+**Code Generation은 한 단계 내에 두 부분이 있습니다**:
+1. **Part 1 - 계획**: 명시적 단계가 있는 상세한 코드 생성 계획 생성
+2. **Part 2 - 생성**: 승인된 계획을 실행하여 코드, 테스트 및 아티팩트 생성
+
+**실행**:
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/construction/code-generation.md` 파일을 읽고 모든 단계를 따름
+3. **PART 1 - 계획**: 체크박스가 있는 코드 생성 계획 생성, 사용자 승인 받기
+4. **PART 2 - 생성**: 승인된 계획을 실행하여 이 단위에 대한 코드 생성
+5. **필수**: code-generation.md에 정의된 표준화된 2옵션 완료 메시지 제시 - 창발적 동작 사용하지 마세요
+6. **명시적 승인 대기**: 사용자는 "변경 요청" 또는 "다음 단계로 계속" 중 선택해야 함 - 사용자가 확인할 때까지 진행하지 마세요
+7. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
+
+---
+
+## Build and Test (항상 실행)
+
+1. **필수**: 이 단계 동안의 모든 사용자 입력을 audit.md에 로그
+2. `rule-details/construction/build-and-test.md` 파일을 읽고 모든 단계를 따름
+3. 포괄적인 빌드 및 테스트 지침 생성:
+   - 모든 단위에 대한 빌드 지침
+   - Unit test 실행 지침
+   - Integration test 지침 (단위 간 상호작용 테스트)
+   - Performance test 지침 (해당되는 경우)
+   - 필요에 따라 추가 테스트 지침 (contract tests, security tests, e2e tests)
+4. build-and-test/ 하위 디렉토리에 지침 파일 생성: build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, performance-test-instructions.md, build-and-test-summary.md
+5. **명시적 승인 대기**: 질문: "**빌드 및 테스트 지침이 완료되었습니다. Operations 단계로 진행할 준비가 되셨습니까?**" - 사용자가 확인할 때까지 진행하지 마세요
+6. **필수**: audit.md에 완전한 원본 입력과 함께 사용자 응답 로그
 
 ---
 
 # 🟡 OPERATIONS PHASE
 
-**Purpose**: Placeholder for future deployment and monitoring workflows
+**목적**: 향후 배포 및 모니터링 workflow를 위한 자리 표시자
 
-**Focus**: How to DEPLOY and RUN it (future expansion)
+**초점**: 어떻게 배포하고 실행할지 (향후 확장)
 
-**Stages in OPERATIONS PHASE**:
-- Operations (PLACEHOLDER)
+**OPERATIONS PHASE의 단계**:
+- Operations (자리 표시자)
 
 ---
 
-## Operations (PLACEHOLDER)
+## Operations (자리 표시자)
 
-**Status**: This stage is currently a placeholder for future expansion.
+**상태**: 이 단계는 현재 향후 확장을 위한 자리 표시자입니다.
 
-The Operations stage will eventually include:
-- Deployment planning and execution
-- Monitoring and observability setup
-- Incident response procedures
-- Maintenance and support workflows
-- Production readiness checklists
+Operations 단계는 결국 다음을 포함할 것입니다:
+- 배포 계획 및 실행
+- 모니터링 및 관찰 가능성 설정
+- 인시던트 대응 절차
+- 유지보수 및 지원 workflow
+- 프로덕션 준비 체크리스트
 
-**Current State**: All build and test activities are handled in the CONSTRUCTION phase.
+**현재 상태**: 모든 빌드 및 테스트 활동은 CONSTRUCTION phase에서 처리됩니다.
 
-## Key Principles
+## 핵심 원칙
 
-- **Adaptive Execution**: Only execute stages that add value
-- **Transparent Planning**: Always show execution plan before starting
-- **User Control**: User can request stage inclusion/exclusion
-- **Progress Tracking**: Update aidlc-state.md with executed and skipped stages
-- **Complete Audit Trail**: Log ALL user inputs and AI responses in audit.md with timestamps
-  - **CRITICAL**: Capture user's COMPLETE RAW INPUT exactly as provided
-  - **CRITICAL**: Never summarize or paraphrase user input in audit log
-  - **CRITICAL**: Log every interaction, not just approvals
-- **Quality Focus**: Complex changes get full treatment, simple changes stay efficient
-- **Content Validation**: Always validate content before file creation per content-validation.md rules
-- **NO EMERGENT BEHAVIOR**: Construction phases MUST use standardized 2-option completion messages as defined in their respective rule files. DO NOT create 3-option menus or other emergent navigation patterns.
+- **적응형 실행**: 가치를 추가하는 단계만 실행
+- **투명한 계획**: 시작하기 전에 항상 실행 계획 표시
+- **사용자 제어**: 사용자는 단계 포함/제외를 요청할 수 있음
+- **진행 상황 추적**: 실행되고 건너뛴 단계로 aidlc-state.md 업데이트
+- **완전한 감사 추적**: 타임스탬프와 함께 audit.md에 모든 사용자 입력 및 AI 응답 로그
+  - **중요**: 제공된 그대로 사용자의 완전한 원본 입력 캡처
+  - **중요**: 감사 로그에서 사용자 입력을 요약하거나 의역하지 마세요
+  - **중요**: 승인뿐만 아니라 모든 상호작용 로그
+- **품질 초점**: 복잡한 변경은 전체 처리, 간단한 변경은 효율적으로 유지
+- **콘텐츠 검증**: content-validation.md 규칙에 따라 파일 생성 전 항상 콘텐츠 검증
+- **창발적 동작 금지**: Construction 단계는 각 규칙 파일에 정의된 표준화된 2옵션 완료 메시지를 사용해야 합니다. 3옵션 메뉴 또는 기타 창발적 탐색 패턴을 만들지 마세요.
 
-## MANDATORY: Plan-Level Checkbox Enforcement
+## 필수: 계획 수준 체크박스 강제
 
-### MANDATORY RULES FOR PLAN EXECUTION
-1. **NEVER complete any work without updating plan checkboxes**
-2. **IMMEDIATELY after completing ANY step described in a plan file, mark that step [x]**
-3. **This must happen in the SAME interaction where the work is completed**
-4. **NO EXCEPTIONS**: Every plan step completion MUST be tracked with checkbox updates
+### 계획 실행에 대한 필수 규칙
+1. **계획 체크박스를 업데이트하지 않고 작업을 완료하지 마세요**
+2. **계획 파일에 설명된 모든 단계를 완료한 직후 해당 단계를 [x]로 표시**
+3. **작업이 완료된 동일한 상호작용에서 이루어져야 함**
+4. **예외 없음**: 모든 계획 단계 완료는 체크박스 업데이트로 추적되어야 함
 
-### Two-Level Checkbox Tracking System
-- **Plan-Level**: Track detailed execution progress within each stage
-- **Stage-Level**: Track overall workflow progress in aidlc-state.md
-- **Update immediately**: All progress updates in SAME interaction where work is completed
+### 2단계 체크박스 추적 시스템
+- **계획 수준**: 각 단계 내에서 상세한 실행 진행 상황 추적
+- **단계 수준**: aidlc-state.md에서 전체 workflow 진행 상황 추적
+- **즉시 업데이트**: 작업이 완료된 동일한 상호작용에서 모든 진행 상황 업데이트
 
-## Prompts Logging Requirements
-- **MANDATORY**: Log EVERY user input (prompts, questions, responses) with timestamp in audit.md
-- **MANDATORY**: Capture user's COMPLETE RAW INPUT exactly as provided (never summarize)
-- **MANDATORY**: Log every approval prompt with timestamp before asking the user
-- **MANDATORY**: Record every user response with timestamp after receiving it
-- **CRITICAL**: ALWAYS append changes to EDIT audit.md file, NEVER use tools and commands that completely overwrite its contents
-- **CRITICAL**: Using file writing tools and commands that overwrite contents of the entire audit.md and cause duplication
-- Use ISO 8601 format for timestamps (YYYY-MM-DDTHH:MM:SSZ)
-- Include stage context for each entry
+## Prompts 로깅 요구사항
+- **필수**: 타임스탬프와 함께 audit.md에 모든 사용자 입력 (prompts, 질문, 응답) 로그
+- **필수**: 제공된 그대로 사용자의 완전한 원본 입력 캡처 (절대 요약하지 마세요)
+- **필수**: 사용자에게 묻기 전에 타임스탬프와 함께 모든 승인 prompt 로그
+- **필수**: 받은 후 타임스탬프와 함께 모든 사용자 응답 기록
+- **중요**: 항상 audit.md 파일을 편집하기 위해 변경 사항을 추가하고, 전체 내용을 완전히 덮어쓰는 도구 및 명령을 절대 사용하지 마세요
+- **중요**: 전체 audit.md의 내용을 덮어쓰고 중복을 일으키는 파일 쓰기 도구 및 명령 사용
+- 타임스탬프에 ISO 8601 형식 사용 (YYYY-MM-DDTHH:MM:SSZ)
+- 각 항목에 단계 context 포함
 
-### Audit Log Format:
+### 감사 로그 형식:
 ```markdown
-## [Stage Name or Interaction Type]
-**Timestamp**: [ISO timestamp]
-**User Input**: "[Complete raw user input - never summarized]"
-**AI Response**: "[AI's response or action taken]"
-**Context**: [Stage, action, or decision made]
+## [단계 이름 또는 상호작용 유형]
+**Timestamp**: [ISO 타임스탬프]
+**User Input**: "[완전한 원본 사용자 입력 - 절대 요약하지 않음]"
+**AI Response**: "[AI의 응답 또는 취한 조치]"
+**Context**: [단계, 조치 또는 결정]
 
 ---
 ```
 
-### Correct Tool Usage for audit.md
+### audit.md에 대한 올바른 도구 사용
 
-✅ CORRECT:
+✅ 올바름:
 
-1. Read the audit.md file
-2. Append/Edit the file to make changes
+1. audit.md 파일 읽기
+2. 파일을 추가/편집하여 변경
 
-❌ WRONG:
+❌ 잘못됨:
 
-1. Read the audit.md file
-2. Completely overwrite the audit.md with the contents of what you read, plus the new changes you want to add to it
+1. audit.md 파일 읽기
+2. 읽은 내용과 추가하려는 새 변경 사항을 합쳐서 audit.md를 완전히 덮어쓰기
 
-## Directory Structure
+## 디렉토리 구조
 
 ```text
-<WORKSPACE-ROOT>/                   # ⚠️ APPLICATION CODE HERE
-├── [project-specific structure]    # Varies by project (see code-generation.md)
+<WORKSPACE-ROOT>/                   # ⚠️ 여기에 애플리케이션 코드
+├── [project-specific structure]    # 프로젝트에 따라 다름 (code-generation.md 참조)
 │
-├── aidlc-docs/                     # 📄 DOCUMENTATION ONLY
+├── aidlc-docs/                     # 📄 문서만
 │   ├── inception/                  # 🔵 INCEPTION PHASE
 │   │   ├── plans/
-│   │   ├── reverse-engineering/    # Brownfield only
+│   │   ├── reverse-engineering/    # Brownfield만
 │   │   ├── requirements/
 │   │   ├── user-stories/
 │   │   └── application-design/
@@ -497,14 +497,14 @@ The Operations stage will eventually include:
 │   │   │   ├── nfr-requirements/
 │   │   │   ├── nfr-design/
 │   │   │   ├── infrastructure-design/
-│   │   │   └── code/               # Markdown summaries only
+│   │   │   └── code/               # Markdown 요약만
 │   │   └── build-and-test/
-│   ├── operations/                 # 🟡 OPERATIONS PHASE (placeholder)
+│   ├── operations/                 # 🟡 OPERATIONS PHASE (자리 표시자)
 │   ├── aidlc-state.md
 │   └── audit.md
 ```
 
-**CRITICAL RULE**:
-- Application code: Workspace root (NEVER in aidlc-docs/)
-- Documentation: aidlc-docs/ only
-- Project structure: See code-generation.md for patterns by project type
+**중요 규칙**:
+- 애플리케이션 코드: Workspace root (절대 aidlc-docs/에 없음)
+- 문서: aidlc-docs/만
+- 프로젝트 구조: 프로젝트 유형별 패턴은 code-generation.md 참조

@@ -1,343 +1,343 @@
-# Error Handling and Recovery Procedures
-
-## General Error Handling Principles
-
-### When Errors Occur
-1. **Identify the error**: Clearly state what went wrong
-2. **Assess impact**: Determine if the error is blocking or can be worked around
-3. **Communicate**: Inform the user about the error and options
-4. **Offer solutions**: Provide clear steps to resolve or work around the error
-5. **Document**: Log the error and resolution in `audit.md`
-
-### Error Severity Levels
-
-**Critical**: Workflow cannot continue
-- Missing required files or artifacts
-- Invalid user input that cannot be processed
-- System errors preventing file operations
-
-**High**: Phase cannot complete as planned
-- Incomplete answers to required questions
-- Contradictory user responses
-- Missing dependencies from prior phases
-
-**Medium**: Phase can continue with workarounds
-- Optional artifacts missing
-- Non-critical validation failures
-- Partial completion possible
-
-**Low**: Minor issues that don't block progress
-- Formatting inconsistencies
-- Optional information missing
-- Non-blocking warnings
-
-## Phase-Specific Error Handling
-
-### Context Assessment Errors
-
-**Error**: Cannot read workspace files
-- **Cause**: Permission issues, missing directories
-- **Solution**: Ask user to verify workspace path and permissions
-- **Workaround**: Proceed with user-provided information only
-
-**Error**: Existing `aidlc-state.md` is corrupted
-- **Cause**: Manual editing, incomplete previous run
-- **Solution**: Ask user if they want to start fresh or attempt recovery
-- **Recovery**: Create backup, start new state file
-
-**Error**: Cannot determine required phases
-- **Cause**: Insufficient information from user
-- **Solution**: Ask clarifying questions about intent and scope
-- **Workaround**: Default to comprehensive execution plan
-
-### Requirements Assessment Errors
-
-**Error**: User provides contradictory requirements
-- **Cause**: Unclear understanding, changing needs
-- **Solution**: Create follow-up questions to resolve contradictions
-- **Do Not Proceed**: Until contradictions are resolved
-
-**Error**: Requirements document cannot be converted
-- **Cause**: Unsupported format, corrupted file
-- **Solution**: Ask user to provide requirements in supported format
-- **Workaround**: Work with user's verbal description
-
-**Error**: Incomplete answers to verification questions
-- **Cause**: User skipped questions, unclear what to answer
-- **Solution**: Highlight unanswered questions, provide examples
-- **Do Not Proceed**: Until all required questions are answered
-
-### Story Development Errors
-
-**Error**: Cannot map requirements to stories
-- **Cause**: Requirements too vague, missing functional details
-- **Solution**: Return to Requirements Assessment for clarification
-- **Workaround**: Create stories based on available information, mark as incomplete
-
-**Error**: User provides ambiguous story planning answers
-- **Cause**: Unclear options, complex decision
-- **Solution**: Add follow-up questions with specific examples
-- **Do Not Proceed**: Until ambiguities are resolved
+# 오류 처리 및 복구 절차
+
+## 일반 오류 처리 원칙
+
+### 오류 발생 시
+1. **오류 식별**: 무엇이 잘못되었는지 명확히 기술
+2. **영향 평가**: 오류가 차단 문제인지 또는 우회 가능한지 결정
+3. **소통**: 오류와 옵션에 대해 사용자에게 알림
+4. **해결책 제공**: 오류를 해결하거나 우회하기 위한 명확한 단계 제공
+5. **문서화**: `audit.md`에 오류 및 해결 방법 기록
+
+### 오류 심각도 수준
+
+**Critical**: 워크플로우를 계속할 수 없음
+- 필수 파일 또는 아티팩트 누락
+- 처리할 수 없는 잘못된 사용자 입력
+- 파일 작업을 방해하는 시스템 오류
+
+**High**: 단계를 계획대로 완료할 수 없음
+- 필수 질문에 대한 불완전한 답변
+- 상충되는 사용자 응답
+- 이전 단계의 종속성 누락
+
+**Medium**: 단계를 우회 방법으로 계속할 수 있음
+- 선택적 아티팩트 누락
+- 중요하지 않은 검증 실패
+- 부분 완료 가능
+
+**Low**: 진행을 차단하지 않는 사소한 문제
+- 형식 불일치
+- 선택적 정보 누락
+- 차단하지 않는 경고
+
+## 단계별 오류 처리
+
+### Context Assessment 오류
+
+**오류**: workspace 파일을 읽을 수 없음
+- **원인**: 권한 문제, 누락된 디렉토리
+- **해결책**: 사용자에게 workspace 경로 및 권한 확인 요청
+- **우회**: 사용자 제공 정보만으로 진행
+
+**오류**: 기존 `aidlc-state.md`가 손상됨
+- **원인**: 수동 편집, 불완전한 이전 실행
+- **해결책**: 사용자에게 처음부터 시작할지 복구를 시도할지 질문
+- **복구**: 백업 생성, 새 상태 파일 시작
+
+**오류**: 필요한 단계를 결정할 수 없음
+- **원인**: 사용자의 정보 부족
+- **해결책**: 의도 및 범위에 대한 명확화 질문
+- **우회**: 포괄적인 실행 계획으로 기본 설정
+
+### Requirements Assessment 오류
+
+**오류**: 사용자가 상충되는 요구사항 제공
+- **원인**: 불명확한 이해, 변경되는 요구
+- **해결책**: 모순을 해결하기 위한 후속 질문 생성
+- **진행 금지**: 모순이 해결될 때까지
+
+**오류**: requirements 문서를 변환할 수 없음
+- **원인**: 지원되지 않는 형식, 손상된 파일
+- **해결책**: 사용자에게 지원되는 형식으로 요구사항 제공 요청
+- **우회**: 사용자의 구두 설명으로 작업
+
+**오류**: 검증 질문에 대한 불완전한 답변
+- **원인**: 사용자가 질문을 건너뛰거나 답변 방법 불명확
+- **해결책**: 답변되지 않은 질문 강조, 예제 제공
+- **진행 금지**: 모든 필수 질문이 답변될 때까지
+
+### Story Development 오류
+
+**오류**: 요구사항을 스토리에 매핑할 수 없음
+- **원인**: 요구사항이 너무 모호함, 기능 세부 사항 누락
+- **해결책**: 명확화를 위해 Requirements Assessment로 돌아가기
+- **우회**: 사용 가능한 정보를 기반으로 스토리 생성, 불완전으로 표시
+
+**오류**: 사용자가 모호한 스토리 계획 답변 제공
+- **원인**: 불명확한 옵션, 복잡한 결정
+- **해결책**: 구체적인 예제와 함께 후속 질문 추가
+- **진행 금지**: 모호성이 해결될 때까지
 
-**Error**: Story generation plan has uncompleted steps
-- **Cause**: Execution interrupted, steps skipped
-- **Solution**: Resume from first uncompleted step
-- **Recovery**: Review completed steps, continue from checkpoint
-
-### Application Design Errors
-
-**Error**: Architectural decision is unclear or contradictory
-- **Cause**: Ambiguous answers, conflicting requirements
-- **Solution**: Add follow-up questions to clarify decision
-- **Do Not Proceed**: Until decision is clear and documented
+**오류**: 스토리 생성 계획에 완료되지 않은 단계가 있음
+- **원인**: 실행 중단, 단계 건너뛰기
+- **해결책**: 완료되지 않은 첫 번째 단계부터 재개
+- **복구**: 완료된 단계 검토, 체크포인트에서 계속
+
+### Application Design 오류
+
+**오류**: 아키텍처 결정이 불명확하거나 상충됨
+- **원인**: 모호한 답변, 상충하는 요구사항
+- **해결책**: 결정을 명확히 하기 위한 후속 질문 추가
+- **진행 금지**: 결정이 명확하고 문서화될 때까지
 
-**Error**: Cannot determine number of services/units
-- **Cause**: Insufficient information about boundaries
-- **Solution**: Ask specific questions about deployment, team structure, scaling
-- **Workaround**: Default to monolith, allow change later
-
-### Design Errors
+**오류**: 서비스/유닛 수를 결정할 수 없음
+- **원인**: 경계에 대한 정보 부족
+- **해결책**: 배포, 팀 구조, 확장에 대한 구체적인 질문
+- **우회**: 모놀리스로 기본 설정, 나중에 변경 허용
+
+### Design 오류
 
-**Error**: Unit dependencies are circular
-- **Cause**: Poor boundary definition, tight coupling
-- **Solution**: Identify circular dependencies, suggest refactoring
-- **Recovery**: Revise unit boundaries to break cycles
+**오류**: 유닛 종속성이 순환적임
+- **원인**: 경계 정의 불량, 강한 결합
+- **해결책**: 순환 종속성 식별, 리팩토링 제안
+- **복구**: 순환을 깨기 위해 유닛 경계 수정
 
-**Error**: Unit design plan has missing steps
-- **Cause**: Plan generation incomplete, template error
-- **Solution**: Regenerate plan with all required steps
-- **Recovery**: Add missing steps to existing plan
-
-**Error**: Cannot generate design artifacts
-- **Cause**: Missing unit information, unclear requirements
-- **Solution**: Return to Units Planning to clarify unit definition
-- **Workaround**: Generate partial design, mark gaps
+**오류**: 유닛 설계 계획에 누락된 단계가 있음
+- **원인**: 계획 생성 불완전, 템플릿 오류
+- **해결책**: 모든 필수 단계로 계획 재생성
+- **복구**: 기존 계획에 누락된 단계 추가
+
+**오류**: 설계 아티팩트를 생성할 수 없음
+- **원인**: 유닛 정보 누락, 불명확한 요구사항
+- **해결책**: 유닛 정의를 명확히 하기 위해 Units Planning으로 돌아가기
+- **우회**: 부분 설계 생성, 격차 표시
 
-### NFR Implementation Errors
+### NFR Implementation 오류
 
-**Error**: Technology stack choices are incompatible
-- **Cause**: Conflicting requirements, platform limitations
-- **Solution**: Highlight incompatibilities, ask user to choose
-- **Do Not Proceed**: Until compatible choices are made
+**오류**: 기술 스택 선택이 호환되지 않음
+- **원인**: 상충하는 요구사항, 플랫폼 제한
+- **해결책**: 비호환성 강조, 사용자에게 선택 요청
+- **진행 금지**: 호환 가능한 선택이 이루어질 때까지
 
-**Error**: Organizational constraints cannot be met
-- **Cause**: Network restrictions, security policies
-- **Solution**: Document constraints, ask user for workarounds
-- **Escalation**: May require human intervention for setup
+**오류**: 조직 제약을 충족할 수 없음
+- **원인**: 네트워크 제한, 보안 정책
+- **해결책**: 제약 문서화, 사용자에게 우회 방법 요청
+- **에스컬레이션**: 설정을 위한 인간 개입이 필요할 수 있음
 
-**Error**: NFR implementation step requires human action
-- **Cause**: AI cannot perform certain tasks (network config, credentials)
-- **Solution**: Clearly mark as **HUMAN TASK**, provide instructions
-- **Wait**: For user confirmation before proceeding
+**오류**: NFR 구현 단계에 인간 작업 필요
+- **원인**: AI가 특정 작업을 수행할 수 없음 (네트워크 구성, 자격 증명)
+- **해결책**: **HUMAN TASK** 로 명확히 표시, 지침 제공
+- **대기**: 진행하기 전에 사용자 확인 대기
 
-### Code Planning Errors
+### Code Planning 오류
 
-**Error**: Code generation plan is incomplete
-- **Cause**: Missing design artifacts, unclear requirements
-- **Solution**: Return to Design phase to complete artifacts
-- **Recovery**: Generate plan with available information, mark gaps
+**오류**: 코드 생성 계획이 불완전함
+- **원인**: 설계 아티팩트 누락, 불명확한 요구사항
+- **해결책**: 아티팩트를 완성하기 위해 Design 단계로 돌아가기
+- **복구**: 사용 가능한 정보로 계획 생성, 격차 표시
 
-**Error**: Unit dependencies not satisfied
-- **Cause**: Dependent units not yet generated
-- **Solution**: Reorder generation sequence to respect dependencies
-- **Workaround**: Generate with stub dependencies, integrate later
+**오류**: 유닛 종속성이 충족되지 않음
+- **원인**: 종속 유닛이 아직 생성되지 않음
+- **해결책**: 종속성을 존중하도록 생성 순서 재정렬
+- **우회**: 스텁 종속성으로 생성, 나중에 통합
 
-### Code Generation Errors
-
-**Error**: Cannot generate code for a step
-- **Cause**: Insufficient design information, unclear requirements
-- **Solution**: Skip step, document as incomplete, continue
-- **Recovery**: Return to step after gathering more information
+### Code Generation 오류
+
+**오류**: 단계에 대한 코드를 생성할 수 없음
+- **원인**: 설계 정보 부족, 불명확한 요구사항
+- **해결책**: 단계 건너뛰기, 불완전으로 문서화, 계속
+- **복구**: 더 많은 정보를 수집한 후 단계로 돌아가기
 
-**Error**: Generated code has syntax errors
-- **Cause**: Template issues, language-specific problems
-- **Solution**: Fix syntax errors, regenerate if needed
-- **Validation**: Verify code compiles before proceeding
+**오류**: 생성된 코드에 구문 오류가 있음
+- **원인**: 템플릿 문제, 언어별 문제
+- **해결책**: 구문 오류 수정, 필요시 재생성
+- **검증**: 진행하기 전에 코드가 컴파일되는지 확인
 
-**Error**: Test generation fails
-- **Cause**: Complex logic, missing test framework setup
-- **Solution**: Generate basic test structure, mark for manual completion
-- **Workaround**: Proceed without tests, add in Operations phase
+**오류**: 테스트 생성 실패
+- **원인**: 복잡한 로직, 테스트 프레임워크 설정 누락
+- **해결책**: 기본 테스트 구조 생성, 수동 완료로 표시
+- **우회**: 테스트 없이 진행, Operations 단계에서 추가
 
-### Operations Errors
+### Operations 오류
 
-**Error**: Cannot determine build tool
-- **Cause**: Unusual project structure, multiple build systems
-- **Solution**: Ask user to specify build tool and commands
-- **Workaround**: Provide generic instructions, user adapts
+**오류**: 빌드 도구를 결정할 수 없음
+- **원인**: 비정상적인 프로젝트 구조, 여러 빌드 시스템
+- **해결책**: 사용자에게 빌드 도구 및 명령 지정 요청
+- **우회**: 일반 지침 제공, 사용자가 조정
 
-**Error**: Deployment target is unclear
-- **Cause**: Multiple environments, complex infrastructure
-- **Solution**: Ask user to specify deployment targets and methods
-- **Workaround**: Provide instructions for common platforms
-
-## Recovery Procedures
-
-### Partial Phase Completion
-
-**Scenario**: Phase was interrupted mid-execution
-
-**Recovery Steps**:
-1. Load the phase plan file
-2. Identify last completed step (last [x] checkbox)
-3. Resume from next uncompleted step
-4. Verify all prior steps are actually complete
-5. Continue execution normally
-
-### Corrupted State File
-
-**Scenario**: `aidlc-state.md` is corrupted or inconsistent
-
-**Recovery Steps**:
-1. Create backup: `aidlc-state.md.backup`
-2. Ask user which phase they're actually on
-3. Regenerate state file from scratch
-4. Mark completed phases based on existing artifacts
-5. Resume from current phase
-
-### Missing Artifacts
-
-**Scenario**: Required artifacts from prior phase are missing
-
-**Recovery Steps**:
-1. Identify which artifacts are missing
-2. Determine if they can be regenerated
-3. If yes: Return to that phase, regenerate artifacts
-4. If no: Ask user to provide information manually
-5. Document the gap in `audit.md`
-
-### User Wants to Restart Phase
-
-**Scenario**: User is unhappy with phase results and wants to redo
-
-**Recovery Steps**:
-1. Confirm user wants to restart (data will be lost)
-2. Archive existing artifacts: `{artifact}.backup`
-3. Reset phase status in `aidlc-state.md`
-4. Clear phase checkboxes in plan files
-5. Re-execute phase from beginning
-
-### User Wants to Skip Phase
-
-**Scenario**: User wants to skip a phase that was planned
-
-**Recovery Steps**:
-1. Confirm user understands implications
-2. Document skip reason in `audit.md`
-3. Mark phase as "SKIPPED" in `aidlc-state.md`
-4. Proceed to next phase
-5. Note: May cause issues in later phases if dependencies missing
-
-## Escalation Guidelines
-
-### When to Ask for User Help
-
-**Immediately**:
-- Contradictory or ambiguous user input
-- Missing required information
-- Technical constraints AI cannot resolve
-- Decisions requiring business judgment
-
-**After Attempting Resolution**:
-- Repeated errors in same step
-- Complex technical issues
-- Unusual project structures
-- Integration with external systems
-
-### When to Suggest Starting Over
-
-**Consider Fresh Start If**:
-- Multiple phases have errors
-- State file is severely corrupted
-- User cannot provide missing information
-- Artifacts are inconsistent across phases
-
-## Session Resumption Errors
-
-### Missing Artifacts During Resumption
-
-**Error**: Required artifacts from previous stages are missing
-- **Cause**: Files deleted, moved, or never created
-- **Solution**: 
-  1. Identify which stage created the missing artifacts
-  2. Check if stage was marked complete in aidlc-state.md
-  3. If marked complete but artifacts missing: Regenerate that stage
-  4. If not marked complete: Resume from that stage
-- **Recovery**: Return to the stage that creates missing artifacts and re-execute
-
-**Error**: Artifact file exists but is empty or corrupted
-- **Cause**: Interrupted write, manual editing, file system issues
-- **Solution**:
-  1. Create backup of corrupted file
-  2. Attempt to regenerate from stage that creates it
-  3. If cannot regenerate: Ask user for information to recreate
-- **Recovery**: Re-execute the stage that creates the artifact
-
-### Inconsistent State During Resumption
-
-**Error**: aidlc-state.md shows stage complete but artifacts don't exist
-- **Cause**: State file updated but artifact generation failed
-- **Solution**:
-  1. Mark stage as incomplete in aidlc-state.md
-  2. Re-execute the stage to generate artifacts
-  3. Verify artifacts exist before marking complete
-- **Recovery**: Reset stage status and re-execute
-
-**Error**: Artifacts exist but aidlc-state.md shows stage incomplete
-- **Cause**: Artifact generation succeeded but state update failed
-- **Solution**:
-  1. Verify artifacts are complete and valid
-  2. Update aidlc-state.md to mark stage complete
-  3. Proceed to next stage
-- **Recovery**: Update state file to reflect actual completion
-
-**Error**: Multiple stages marked as "current" in aidlc-state.md
-- **Cause**: State file corruption, manual editing
-- **Solution**:
-  1. Review artifacts to determine actual progress
-  2. Ask user which stage they're actually on
-  3. Correct aidlc-state.md to show single current stage
-- **Recovery**: Rebuild state file based on existing artifacts
-
-### Context Loading Errors
-
-**Error**: Cannot load required context from previous stages
-- **Cause**: Missing files, corrupted content, wrong file paths
-- **Solution**:
-  1. List which artifacts are needed for current stage
-  2. Check which ones are missing or corrupted
-  3. Regenerate missing artifacts or ask user for information
-- **Recovery**: Complete prerequisite stages before resuming current stage
-
-**Error**: Loaded artifacts contain contradictory information
-- **Cause**: Manual editing, multiple people working, incomplete updates
-- **Solution**:
-  1. Identify contradictions and present to user
-  2. Ask user which information is correct
-  3. Update artifacts to resolve contradictions
-- **Recovery**: Reconcile contradictions before proceeding
-
-### Resumption Best Practices
-
-1. **Always validate state**: Check aidlc-state.md matches actual artifacts
-2. **Load incrementally**: Load artifacts stage-by-stage, validate each
-3. **Fail fast**: Stop immediately if critical artifacts are missing
-4. **Communicate clearly**: Tell user exactly what's missing and why it's needed
-5. **Offer options**: Regenerate, provide manually, or start fresh
-6. **Document recovery**: Log all recovery actions in audit.md State file is severely corrupted
-- User requirements have changed significantly
-- Architectural decision needs to be reversed
-
-**Before Starting Over**:
-1. Archive all existing work
-2. Document lessons learned
-3. Identify what to preserve
-4. Get user confirmation
-5. Create new execution plan
-
-## Logging Requirements
-
-### Error Logging Format
+**오류**: 배포 대상이 불명확함
+- **원인**: 여러 환경, 복잡한 인프라
+- **해결책**: 사용자에게 배포 대상 및 방법 지정 요청
+- **우회**: 일반 플랫폼에 대한 지침 제공
+
+## 복구 절차
+
+### 부분 단계 완료
+
+**시나리오**: 단계가 실행 중에 중단됨
+
+**복구 단계**:
+1. 단계 계획 파일 로드
+2. 마지막 완료 단계 식별 (마지막 [x] 체크박스)
+3. 다음 완료되지 않은 단계부터 재개
+4. 모든 이전 단계가 실제로 완료되었는지 확인
+5. 정상적으로 실행 계속
+
+### 손상된 상태 파일
+
+**시나리오**: `aidlc-state.md`가 손상되었거나 일관성 없음
+
+**복구 단계**:
+1. 백업 생성: `aidlc-state.md.backup`
+2. 사용자에게 실제로 어떤 단계에 있는지 질문
+3. 처음부터 상태 파일 재생성
+4. 기존 아티팩트를 기반으로 완료된 단계 표시
+5. 현재 단계부터 재개
+
+### 아티팩트 누락
+
+**시나리오**: 이전 단계의 필수 아티팩트가 누락됨
+
+**복구 단계**:
+1. 누락된 아티팩트 식별
+2. 재생성 가능 여부 결정
+3. 가능한 경우: 해당 단계로 돌아가서 아티팩트 재생성
+4. 불가능한 경우: 사용자에게 수동으로 정보 제공 요청
+5. `audit.md`에 격차 문서화
+
+### 사용자가 단계를 재시작하려는 경우
+
+**시나리오**: 사용자가 단계 결과에 불만족하고 다시 하려는 경우
+
+**복구 단계**:
+1. 사용자가 재시작을 원하는지 확인 (데이터가 손실됨)
+2. 기존 아티팩트 아카이브: `{artifact}.backup`
+3. `aidlc-state.md`에서 단계 상태 재설정
+4. 계획 파일에서 단계 체크박스 지우기
+5. 처음부터 단계 재실행
+
+### 사용자가 단계를 건너뛰려는 경우
+
+**시나리오**: 사용자가 계획된 단계를 건너뛰려는 경우
+
+**복구 단계**:
+1. 사용자가 영향을 이해하는지 확인
+2. `audit.md`에 건너뛰기 이유 문서화
+3. `aidlc-state.md`에서 단계를 "SKIPPED"로 표시
+4. 다음 단계로 진행
+5. 참고: 종속성이 누락된 경우 이후 단계에서 문제가 발생할 수 있음
+
+## 에스컬레이션 가이드라인
+
+### 사용자 도움을 요청할 때
+
+**즉시**:
+- 상충되거나 모호한 사용자 입력
+- 필수 정보 누락
+- AI가 해결할 수 없는 기술적 제약
+- 비즈니스 판단이 필요한 결정
+
+**해결 시도 후**:
+- 동일한 단계에서 반복적인 오류
+- 복잡한 기술 문제
+- 비정상적인 프로젝트 구조
+- 외부 시스템과의 통합
+
+### 처음부터 시작을 제안할 때
+
+**다음의 경우 새로 시작 고려**:
+- 여러 단계에 오류가 있음
+- 상태 파일이 심각하게 손상됨
+- 사용자가 누락된 정보를 제공할 수 없음
+- 단계 전반에 걸쳐 아티팩트가 일관성 없음
+
+## 세션 재개 오류
+
+### 재개 중 아티팩트 누락
+
+**오류**: 이전 스테이지의 필수 아티팩트가 누락됨
+- **원인**: 파일 삭제, 이동 또는 절대 생성되지 않음
+- **해결책**:
+  1. 누락된 아티팩트를 생성한 스테이지 식별
+  2. aidlc-state.md에서 스테이지가 완료로 표시되었는지 확인
+  3. 완료로 표시되었지만 아티팩트가 누락된 경우: 해당 스테이지 재생성
+  4. 완료로 표시되지 않은 경우: 해당 스테이지부터 재개
+- **복구**: 누락된 아티팩트를 생성하는 스테이지로 돌아가서 재실행
+
+**오류**: 아티팩트 파일이 존재하지만 비어 있거나 손상됨
+- **원인**: 쓰기 중단, 수동 편집, 파일 시스템 문제
+- **해결책**:
+  1. 손상된 파일의 백업 생성
+  2. 생성하는 스테이지에서 재생성 시도
+  3. 재생성할 수 없는 경우: 재생성할 정보를 사용자에게 요청
+- **복구**: 아티팩트를 생성하는 스테이지 재실행
+
+### 재개 중 일관성 없는 상태
+
+**오류**: aidlc-state.md가 스테이지 완료를 표시하지만 아티팩트가 존재하지 않음
+- **원인**: 상태 파일이 업데이트되었지만 아티팩트 생성 실패
+- **해결책**:
+  1. aidlc-state.md에서 스테이지를 불완전으로 표시
+  2. 아티팩트를 생성하기 위해 스테이지 재실행
+  3. 완료로 표시하기 전에 아티팩트가 존재하는지 확인
+- **복구**: 스테이지 상태 재설정 및 재실행
+
+**오류**: 아티팩트가 존재하지만 aidlc-state.md가 스테이지 불완전을 표시
+- **원인**: 아티팩트 생성 성공했지만 상태 업데이트 실패
+- **해결책**:
+  1. 아티팩트가 완전하고 유효한지 확인
+  2. 스테이지 완료로 표시하도록 aidlc-state.md 업데이트
+  3. 다음 스테이지로 진행
+- **복구**: 실제 완료를 반영하도록 상태 파일 업데이트
+
+**오류**: aidlc-state.md에서 여러 스테이지가 "current"로 표시됨
+- **원인**: 상태 파일 손상, 수동 편집
+- **해결책**:
+  1. 실제 진행 상황을 결정하기 위해 아티팩트 검토
+  2. 사용자에게 실제로 어떤 스테이지에 있는지 질문
+  3. 단일 현재 스테이지를 표시하도록 aidlc-state.md 수정
+- **복구**: 기존 아티팩트를 기반으로 상태 파일 재구축
+
+### Context 로딩 오류
+
+**오류**: 이전 스테이지의 필수 context를 로드할 수 없음
+- **원인**: 파일 누락, 손상된 콘텐츠, 잘못된 파일 경로
+- **해결책**:
+  1. 현재 스테이지에 필요한 아티팩트 목록
+  2. 누락되거나 손상된 것 확인
+  3. 누락된 아티팩트 재생성 또는 사용자에게 정보 요청
+- **복구**: 현재 스테이지를 재개하기 전에 전제 조건 스테이지 완료
+
+**오류**: 로드된 아티팩트에 상충되는 정보 포함
+- **원인**: 수동 편집, 여러 사람이 작업, 불완전한 업데이트
+- **해결책**:
+  1. 모순을 식별하고 사용자에게 제시
+  2. 사용자에게 어떤 정보가 올바른지 질문
+  3. 모순을 해결하도록 아티팩트 업데이트
+- **복구**: 진행하기 전에 모순 조정
+
+### 재개 모범 사례
+
+1. **항상 상태 검증**: aidlc-state.md가 실제 아티팩트와 일치하는지 확인
+2. **점진적으로 로드**: 스테이지별로 아티팩트 로드, 각각 검증
+3. **빠르게 실패**: 중요한 아티팩트가 누락된 경우 즉시 중지
+4. **명확하게 소통**: 사용자에게 누락된 것과 필요한 이유를 정확히 알림
+5. **옵션 제공**: 재생성, 수동 제공 또는 새로 시작
+6. **복구 문서화**: audit.md에 모든 복구 작업 기록 상태 파일이 심각하게 손상됨
+- 사용자 요구사항이 크게 변경됨
+- 아키텍처 결정을 되돌려야 함
+
+**처음부터 시작하기 전**:
+1. 모든 기존 작업 아카이브
+2. 배운 교훈 문서화
+3. 보존할 것 식별
+4. 사용자 확인 받기
+5. 새 실행 계획 생성
+
+## 로깅 요구사항
+
+### 오류 로깅 형식
 
 ```markdown
 ## Error - [Phase Name]
@@ -351,7 +351,7 @@
 ---
 ```
 
-### Recovery Logging Format
+### 복구 로깅 형식
 
 ```markdown
 ## Recovery - [Phase Name]
@@ -364,10 +364,10 @@
 ---
 ```
 
-## Prevention Best Practices
+## 예방 모범 사례
 
-1. **Validate Early**: Check inputs and dependencies before starting work
-2. **Checkpoint Often**: Update checkboxes immediately after completing steps
-3. **Communicate Clearly**: Explain what you're doing and why
-4. **Ask Questions**: Don't assume - clarify ambiguities immediately
-5. **Document Everything**: Log all decisions and changes in `audit.md`
+1. **조기 검증**: 작업을 시작하기 전에 입력 및 종속성 확인
+2. **자주 체크포인트**: 단계를 완료한 직후 체크박스 업데이트
+3. **명확한 소통**: 무엇을 하는지, 왜 하는지 설명
+4. **질문하기**: 가정하지 말고 - 모호성을 즉시 명확히 하기
+5. **모든 것을 문서화**: `audit.md`에 모든 결정 및 변경 사항 기록

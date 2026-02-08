@@ -1,79 +1,79 @@
 # NFR Requirements
 
-## Prerequisites
-- Functional Design must be complete for the unit
-- Unit functional design artifacts must be available
-- Execution plan must indicate NFR Requirements stage should execute
+## 사전 요구사항
+- 유닛에 대한 Functional Design이 완료되어야 함
+- 유닛 functional design 아티팩트가 사용 가능해야 함
+- 실행 계획이 NFR Requirements 단계를 실행해야 함을 나타내야 함
 
-## Overview
-Determine non-functional requirements for the unit and make tech stack choices.
+## 개요
+유닛의 비기능 요구사항을 결정하고 기술 스택 선택을 합니다.
 
-## Steps to Execute
+## 실행 단계
 
-### Step 1: Analyze Functional Design
-- Read functional design artifacts from `aidlc-docs/construction/{unit-name}/functional-design/`
-- Understand business logic complexity and requirements
+### Step 1: Functional Design 분석
+- `aidlc-docs/construction/{unit-name}/functional-design/`에서 functional design 아티팩트 읽기
+- 비즈니스 로직 복잡성 및 요구사항 이해
 
-### Step 2: Create NFR Requirements Plan
-- Generate plan with checkboxes [] for NFR assessment
-- Focus on scalability, performance, availability, security
-- Each step should have a checkbox []
+### Step 2: NFR Requirements 계획 생성
+- NFR 평가를 위한 체크박스 []가 포함된 계획 생성
+- 확장성, 성능, 가용성, 보안에 초점
+- 각 단계는 체크박스 []가 있어야 함
 
-### Step 3: Generate Context-Appropriate Questions
-**DIRECTIVE**: Thoroughly analyze the functional design to identify ALL areas where NFR clarification would improve system quality and architecture decisions. Be proactive in asking questions to ensure comprehensive NFR coverage.
+### Step 3: 컨텍스트에 적합한 질문 생성
+**지침**: functional design을 철저히 분석하여 NFR 명확화가 시스템 품질 및 아키텍처 결정을 개선할 수 있는 모든 영역을 식별합니다. 포괄적인 NFR 커버리지를 보장하기 위해 적극적으로 질문하세요.
 
-**CRITICAL**: Default to asking questions when there is ANY ambiguity or missing detail that could affect system quality. It's better to ask too many questions than to make incorrect NFR assumptions.
+**중요**: 시스템 품질에 영향을 줄 수 있는 애매함이나 누락된 세부 사항이 있는 경우 기본적으로 질문하세요. 잘못된 NFR 가정을 하는 것보다 너무 많은 질문을 하는 것이 좋습니다.
 
-- EMBED questions using [Answer]: tag format
-- Focus on ANY ambiguities, missing information, or areas needing clarification
-- Generate questions wherever user input would improve NFR and tech stack decisions
-- **When in doubt, ask the question** - overconfidence leads to poor system quality
+- [Answer]: 태그 형식을 사용하여 질문 삽입
+- 애매함, 누락된 정보 또는 명확화가 필요한 영역에 초점
+- 사용자 입력이 NFR 및 기술 스택 결정을 개선할 수 있는 모든 곳에서 질문 생성
+- **의심스러울 때는 질문하기** - 과신은 나쁜 시스템 품질로 이어짐
 
-**Question categories to evaluate** (consider ALL categories):
-- **Scalability Requirements** - Ask about expected load, growth patterns, scaling triggers, and capacity planning
-- **Performance Requirements** - Ask about response times, throughput, latency, and performance benchmarks
-- **Availability Requirements** - Ask about uptime expectations, disaster recovery, failover, and business continuity
-- **Security Requirements** - Ask about data protection, compliance, authentication, authorization, and threat models
-- **Tech Stack Selection** - Ask about technology preferences, constraints, existing systems, and integration requirements
-- **Reliability Requirements** - Ask about error handling, fault tolerance, monitoring, and alerting needs
-- **Maintainability Requirements** - Ask about code quality, documentation, testing, and operational requirements
-- **Usability Requirements** - Ask about user experience, accessibility, and interface requirements
+**평가해야 할 질문 카테고리** (모든 카테고리 고려):
+- **확장성 요구사항** - 예상 부하, 성장 패턴, 확장 트리거 및 용량 계획에 대해 질문
+- **성능 요구사항** - 응답 시간, 처리량, 지연 시간 및 성능 벤치마크에 대해 질문
+- **가용성 요구사항** - 가동 시간 기대치, 재해 복구, 장애 조치 및 비즈니스 연속성에 대해 질문
+- **보안 요구사항** - 데이터 보호, 규정 준수, 인증, 권한 부여 및 위협 모델에 대해 질문
+- **기술 스택 선택** - 기술 선호도, 제약 조건, 기존 시스템 및 통합 요구사항에 대해 질문
+- **신뢰성 요구사항** - 오류 처리, 내결함성, 모니터링 및 알림 요구사항에 대해 질문
+- **유지보수성 요구사항** - 코드 품질, 문서화, 테스트 및 운영 요구사항에 대해 질문
+- **사용성 요구사항** - 사용자 경험, 접근성 및 인터페이스 요구사항에 대해 질문
 
-### Step 4: Store Plan
-- Save as `aidlc-docs/construction/plans/{unit-name}-nfr-requirements-plan.md`
-- Include all [Answer]: tags for user input
+### Step 4: 계획 저장
+- `aidlc-docs/construction/plans/{unit-name}-nfr-requirements-plan.md`로 저장
+- 사용자 입력을 위한 모든 [Answer]: 태그 포함
 
-### Step 5: Collect and Analyze Answers
-- Wait for user to complete all [Answer]: tags
-- **MANDATORY**: Carefully review ALL responses for vague or ambiguous answers
-- **CRITICAL**: Add follow-up questions for ANY unclear responses - do not proceed with ambiguity
-- Look for responses like "depends", "maybe", "not sure", "mix of", "somewhere between", "standard", "typical"
-- Create clarification questions file if ANY ambiguities are detected
-- **Do not proceed until ALL ambiguities are resolved**
+### Step 5: 답변 수집 및 분석
+- 사용자가 모든 [Answer]: 태그를 완료할 때까지 대기
+- **필수**: 모호하거나 애매한 답변에 대해 모든 응답을 신중하게 검토
+- **중요**: 불명확한 응답에 대한 후속 질문 추가 - 애매함이 있는 상태로 진행하지 말 것
+- "depends", "maybe", "not sure", "mix of", "somewhere between", "standard", "typical"과 같은 응답 찾기
+- 애매함이 감지되면 명확화 질문 파일 생성
+- **모든 애매함이 해결될 때까지 진행하지 말 것**
 
-### Step 6: Generate NFR Requirements Artifacts
-- Create `aidlc-docs/construction/{unit-name}/nfr-requirements/nfr-requirements.md`
-- Create `aidlc-docs/construction/{unit-name}/nfr-requirements/tech-stack-decisions.md`
+### Step 6: NFR Requirements 아티팩트 생성
+- `aidlc-docs/construction/{unit-name}/nfr-requirements/nfr-requirements.md` 생성
+- `aidlc-docs/construction/{unit-name}/nfr-requirements/tech-stack-decisions.md` 생성
 
-### Step 7: Present Completion Message
-- Present completion message in this structure:
-     1. **Completion Announcement** (mandatory): Always start with this:
+### Step 7: 완료 메시지 제시
+- 다음 구조로 완료 메시지 제시:
+     1. **완료 공지** (필수): 항상 다음으로 시작:
 
 ```markdown
 # 📊 NFR Requirements Complete - [unit-name]
 ```
 
-     2. **AI Summary** (optional): Provide structured bullet-point summary of NFR requirements
-        - Format: "NFR requirements assessment has identified [description]:"
-        - List key scalability, performance, availability requirements (bullet points)
-        - List security and compliance requirements identified
-        - Mention tech stack decisions and rationale
-        - DO NOT include workflow instructions ("please review", "let me know", "proceed to next phase", "before we proceed")
-        - Keep factual and content-focused
-     3. **Formatted Workflow Message** (mandatory): Always end with this exact format:
+     2. **AI 요약** (선택): NFR requirements의 구조화된 글머리 기호 요약 제공
+        - 형식: "NFR requirements assessment has identified [description]:"
+        - 주요 확장성, 성능, 가용성 요구사항 나열(글머리 기호)
+        - 식별된 보안 및 규정 준수 요구사항 나열
+        - 기술 스택 결정 및 근거 언급
+        - 워크플로우 지침 포함하지 말 것("please review", "let me know", "proceed to next phase", "before we proceed")
+        - 사실적이고 내용 중심으로 유지
+     3. **형식화된 워크플로우 메시지** (필수): 항상 이 정확한 형식으로 종료:
 
 ```markdown
-> **📋 <u>**REVIEW REQUIRED:**</u>**  
+> **📋 <u>**REVIEW REQUIRED:**</u>**
 > Please examine the NFR requirements at: `aidlc-docs/construction/[unit-name]/nfr-requirements/`
 
 
@@ -82,18 +82,18 @@ Determine non-functional requirements for the unit and make tech stack choices.
 >
 > **You may:**
 >
-> 🔧 **Request Changes** - Ask for modifications to the NFR requirements based on your review  
+> 🔧 **Request Changes** - Ask for modifications to the NFR requirements based on your review
 > ✅ **Continue to Next Stage** - Approve NFR requirements and proceed to **[next-stage-name]**
 
 ---
 ```
 
-### Step 8: Wait for Explicit Approval
-- Do not proceed until the user explicitly approves the NFR requirements
-- Approval must be clear and unambiguous
-- If user requests changes, update the requirements and repeat the approval process
+### Step 8: 명시적 승인 대기
+- 사용자가 NFR requirements를 명시적으로 승인할 때까지 진행하지 말 것
+- 승인은 명확하고 애매하지 않아야 함
+- 사용자가 변경을 요청하면 요구사항을 업데이트하고 승인 프로세스 반복
 
-### Step 9: Record Approval and Update Progress
-- Log approval in audit.md with timestamp
-- Record the user's approval response with timestamp
-- Mark NFR Requirements stage complete in aidlc-state.md
+### Step 9: 승인 기록 및 진행 상황 업데이트
+- 타임스탬프와 함께 audit.md에 승인 로그 기록
+- 타임스탬프와 함께 사용자의 승인 응답 기록
+- aidlc-state.md에서 NFR Requirements 단계를 완료로 표시
